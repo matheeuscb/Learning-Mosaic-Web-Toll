@@ -1,0 +1,33 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Simple MOOC - Uma simples plataforma de ensino a distância" />
+    <title>Learning Mosaic Web Tool</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+</head>
+<body>
+<div class="content">
+    <div class="header">
+        <div class="pure-menu pure-menu-open pure-menu-fixed pure-menu-horizontal">
+            <a class="pure-menu-heading" href="{% url "home" %}">Learning Mosaic Web Tool</a>
+            <ul>
+                <li class="pure-menu-selected"><a href= "{% url "home" %}">Início</a></li>
+                <li><a href="#">Sobre</a></li>
+                <li><a href="{% url "contato" %}">Contato</a></li>
+                <li><a href="#">Login</a></li>
+            </ul>
+        </div>
+    </div>
+</div>   
+  {% block content %}{% endblock %} <!--usado para fazer um bloco que vai ser renderizado aqui dentro preservando as extremidades e mantendo a ideologia de não repetir código-->
+
+    <div class="footer">
+        Learning Mosaic Web Tool - Trabalho de Conclusão de Curso -  Matheus Carvalho Barbosa
+    </div>
+<script src="http://yui.yahooapis.com/3.12.0/build/yui/yui-min.js"></script>
+</body>
+</html>
