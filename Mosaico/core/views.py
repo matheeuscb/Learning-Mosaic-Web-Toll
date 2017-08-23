@@ -7,3 +7,11 @@ def home(request):
 
 def contato(request):
 	return render(request, 'contato.html')
+
+
+def login(request):
+	return render(request, 'login.html')
+
+
+def logout(request):
+	return render(request, 'home.html')

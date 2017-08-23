@@ -1,5 +1,5 @@
 <!doctype html>
-{% load static %}
+{% load static from staticfiles %}
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -18,7 +18,7 @@
                 <li class="pure-menu-selected"><a href= "{% url "home" %}">Início</a></li>
                 <li><a href="#">Sobre</a></li>
                 <li><a href="{% url "contato" %}">Contato</a></li>
-                <li><a href="#">Login</a></li>
+                <li><a href="{%url "login" %}">Login</a></li>
             </ul>
         </div>
     </div>
