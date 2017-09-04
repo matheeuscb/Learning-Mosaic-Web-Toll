@@ -85,6 +85,17 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = '/Mosaico/Mosaico/core/static'
+STATIC_ROOT = '/Mosaico/Mosaico/core/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'Mosaico', 'media')
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR,'Mosaico/core/templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            # ... some options here ...
+        },
+    },
+]

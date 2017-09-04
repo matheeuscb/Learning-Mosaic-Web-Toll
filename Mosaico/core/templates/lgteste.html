@@ -1,0 +1,74 @@
+{% load static from staticfiles %}
+
+<div class="content">
+    <div class="pure-g-r content-ribbon">
+        <div class="pure-u-1">
+        <div class="content">
+    <div class="pure-g-r content-ribbon">
+        <div class="pure-u-1">
+
+    <div id="content-container" class="container p-none">
+        <div class="lgn-container col-lg-8">
+            <!-- <form id="login-form" method="post" 
+                  action="{% url 'login' %}">
+                {% csrf_token %}
+                <table class="table">
+                    <tr>
+                        <td><label for="id_username">Usuário</label></td>
+                        <td><input id="id_username" name="username" 
+                                   type="text" class="form-control"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="id_password">Senha</label></td>
+                        <td><input id="id_password" name="password" 
+                                   type="password" class="form-control"></td>
+                    </tr>
+                </table>
+                {% if form.errors %}
+                    <p class=" label label-danger">
+                        ?next= /home
+                        Usuário e Senha Incorretos. 
+                        Por favor, tente novamente.
+                    </p>
+                {% endif %}
+
+                <input type="submit" value="Login" 
+                       class="btn btn-primary pull-right" />
+                <input type="hidden" name="next" value="{{ next }}" />
+            </form> -->
+             <form action="/login/" method="post">
+  <!-- <div class="imgcontainer">
+    <img src="img_avatar2.png" alt="Avatar" class="avatar">
+  </div> -->
+{% csrf_token %} 
+  <div class="container">
+    <label><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="username" required>
+</div>
+<br>
+<div>
+    <label><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="password" required>
+<br>
+</div>
+<div>
+    <button type="submit">Login</button>
+    <!-- <input type="checkbox" checked="checked"> Remember me -->
+  </div>
+
+  <!-- <div class="container" style="background-color:#f1f1f1">
+    <button type="button" class="cancelbtn">Cancel</button>
+    <span class="psw">Forgot <a href="#">password?</a></span>
+  </div> -->
+</form> 
+
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
