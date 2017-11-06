@@ -1,0 +1,72 @@
+{% extends "blank.html" %}
+
+{% block content %}
+
+
+<div class="content-wrapper">
+
+      <div class="container-fluid">
+
+        <!-- Breadcrumbs -->
+       <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#">Início</a>
+          </li>
+          <li class="breadcrumb-item active">Meus Relatórios</li>
+        </ol>
+
+        <div id="main" class="container-fluid" style="margin-top: 30px">
+ 
+  <div id="top" class="row">
+    <div class="col-sm-3">
+      <h2>Relatórios</h2>
+    </div>
+    
+
+
+    <div class="col-sm-9">
+      <!-- <a href="#" class="btn btn-primary pull-right h2">Novo Mosaico</a> -->
+    </div>
+  </div> <!-- /#top -->
+
+  <div id="list" class="row">
+  
+  <div class="table-responsive col-md-12">
+    <table class="table table-striped" cellspacing="0" cellpadding="0">
+      <thead>
+        <tr>
+          <!-- <th>Código de Acesso</th> -->
+          <th style="text-align: center;" >Gráficos</th>
+          <th style="text-align: center;" class="actions">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: center;">Status Inicial x Quantidade de Objetivos</td>
+            <td style="text-align: center;" class="actions">
+          <a class="btn btn-success btn-xs" href="{% url 'grafico_status_inicial' id_canvas=canvas.id%}">Visualizar Gráfico</a>
+        </tr>
+        <tr>
+          <td style="text-align: center;">Objetivos de Aprendizagem x Dimensão </td>
+          <td style="text-align: center;" class="actions">
+          <a class="btn btn-success btn-xs" href="{% url 'grafico_dimensao' id_canvas=canvas.id%}">Visualizar Gráfico</a>
+        </tr>
+        <tr>
+          <td style="text-align: center;">Status Final x Quantidade de Objetivos</td>
+          <td style="text-align: center;" class="actions">
+          <a class="btn btn-success btn-xs" href="{% url 'grafico_status_final' id_canvas=canvas.id%}">Visualizar Gráfico</a>
+        </tr>
+           
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  </div> <!-- /#list -->
+  
+  
+ </div> <!-- /#main -->
+
+
+{% endblock %}

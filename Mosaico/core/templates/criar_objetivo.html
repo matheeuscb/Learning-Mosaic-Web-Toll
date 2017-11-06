@@ -1,0 +1,188 @@
+{% extends "blank.html" %}
+
+{% block content %}
+
+
+<div class="content-wrapper">
+
+      <div class="container-fluid">
+
+        <!-- Breadcrumbs -->
+       <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#">Inicio</a>
+          </li>
+          <li class="breadcrumb-item active">Meus Mosaicos</li>
+        </ol>
+
+        <div id="main" class="container-fluid">
+          <h3 class="page-header">Criar Mosaico</h3>
+         <!--  <h3> {{mosaico.0.id }}</h3> -->
+
+            <!-- MENSAGEM DE ALERTA -->
+       <!--  <div class="row"> -->
+          {% if messages %}
+           {% for message in messages %}
+            {% if message.tags == 'error' %}
+              <div class="alert alert-danger alert-dismissible" role="alert">
+            {% endif %}
+                <a class="panel-close close" data-dismiss="alert">×</a> 
+                {{message}}
+              </div>
+           {% endfor %}
+          {% endif %}
+<!-- FIM MENSAGEM DE ALERTA -->
+
+          <form action="{% url 'criar_objetivo' id_mosaico=mosaico.0.id %}" method="POST">
+            {% csrf_token %} 
+
+            <!-- Selecionar canvas-->
+            <!-- <div class="row">
+              <div class="form-group col-sm-4">
+                <label for="sel_canvas">Selecione o Canvas: </label>
+                <select name ="id_canvas">
+                {%for c in canvas %}
+                  <option value="{{c.id}}"> {{c.nome_canvas}} </option>
+                {% endfor %}
+                </select>
+              </div>
+            </div> -->
+
+<!-- Selecionar Area-->
+             <div class="row">
+              <div class="form-group col-sm-4">
+                <label for="id_area">Área: </label>
+                <select name="id_area">
+                {%for c in area %}
+                  {% if mosaico.0.id_canvas_id = c.id_canvas_id %}
+                    <option value="{{c.id}}"> {{c.nome_area}} </option>
+                  {% endif %}
+                {% endfor %}
+                </select>
+              </div>
+            </div>
+
+            <!-- Selecionar Verbo -->
+            <div class="row">
+              <div class="form-group col-sm-4">
+                <label for="id_verbo">Selecione o verbo: </label>
+                <select class= "form-control" data id="pegar_verbo" name="id_verbo">
+                {%for nivel, verbo in drop.items %}
+                  <optgroup label="{{nivel.tipo_nivel}}">
+                  {% for v in verbo %} 
+                    <option value="{{v.id}}"> {{v.nome_verbo}} </option>
+                    {{v.nome_verbo}} 
+                  {% endfor %}
+                </optgroup>
+                {% endfor %}
+              </select>
+              </div>
+             </div> 
+
+            <!-- Escrever Objetivos de Aprendizagem -->
+            <div class="row">
+              <div class="form-group col-md-8">
+                <label for="descricao_objetivos">Objetivo de Aprendizagem:</label>
+                <input type="text" class="form-control" id="descricao_objetivos" name="descricao_objetivos">
+              </div>
+            </div>
+
+            <!-- Selecionar Status-->
+             <div class="row">
+              <div class="form-group col-sm-4">
+                <label for="status_inicial">Status: </label>
+                <select name="status_inicial">
+                <!-- {%for c in status %}
+                  <option value="{{c.id}}"> {{c.nome_status}} </option>
+                {% endfor %} -->
+                  <option value="1"> Criado no Início </option>
+                  <option value="5"> Criado Durante </option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+            <!-- <div class="form-group col-md-8"> -->
+              <label for="dicas_objetivos">Dicas:</label>
+              <!-- <input type="text" class="form-control" id="descricao_canvas" name="descricao_canvas"> -->
+              <textarea class="form-control col-md-8" rows="3"  id="dicas_objetivos" name="dicas_objetivos" ></textarea>
+            <!-- </div> --> 
+          </div>
+ <!-- 
+              <div class="form-group col-md-4">
+                <label for="descricao_canvas">Descrição do Objetivo</label>
+                <input type="text" class="form-control" id="descricao_objetivos" name="descricao_objetivos">
+              </div> -->
+
+            <!-- <div class="row">
+              <div class="form-group col-md-4">
+                <label for="nome_canvas">Selecione o nivel do verbo </label>
+                <select id="pegar_verbo">
+                {%for c in nivel %}
+                  <option value="{{c.id}}"> {{c.tipo_nivel}} </option>
+                {% endfor %}
+              </div> -->
+<!--     descricao_objetivos = models.TextField('Descrição', blank=True)
+#   status_inicial = models.IntegerField('Status Inicial') 
+#   status_final = models.IntegerField('Status Final')
+#   id_mosaico = models.ForeignKey(Mosaico on_delete=models.CASCADE)
+#   id_verbo = models.ForeignKey(Verbo, on_delete=models.CASCADE) -->
+
+            <hr />
+            <div id="actions" class="row">
+              <div class="col-md-12">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <!-- <a href="{% url 'listagem_mural' }" class="btn btn-default">Cancelar</a>  -->
+                <a href="{% url 'listagem_mural' id_canvas=mosaico.0.id_canvas_id %}" class="btn btn-default">Cancelar</a> 
+ 
+              </div>
+            </div>
+          </form>
+
+        </div>
+
+      </div>
+      <!-- /.container-fluid -->
+
+</div>
+
+<script>
+    $("#pegar_verbo").change(function () {
+      var nivel = $(this).val();
+
+      $.ajax({
+        url: '/dashboard/pegar_verbo.html/',
+        data: {
+          'nivel': nivel
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.verbo) {
+            alert(verbo[0].id);
+          }
+        }
+      });
+
+    });
+  </script>
+
+{% endblock %}
+
+<!-- $( "#novo_sdc_estado" ).change(function() {
+        var url = base_url + 'cadastros/sindicalizados/get_cidade/'+document.getElementById("novo_sdc_estado").value;
+        $.get(url, function(dataReturn) {
+            $('#cidades_novo').html(dataReturn);
+        });
+    });
+
+
+    public function get_cidade($uf) {
+        $cidades = $this->sm->get_cidades($uf);
+
+        $op = array();
+        $op[0] = '--------------';
+        foreach ($cidades as $c) {
+            $op[$c->id_cidade] = $c->nome;
+        }
+        echo '<td>' . form_dropdown('cidade', $op, 0, 'class="form-control large"') . '</td></tr>';
+    } -->

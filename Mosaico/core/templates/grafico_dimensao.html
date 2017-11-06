@@ -1,0 +1,117 @@
+{% extends "blank.html" %}
+
+{% block content %}
+
+
+<div class="content-wrapper">
+
+      <div class="container-fluid">
+
+        <!-- Breadcrumbs -->
+       <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#">Início</a>
+          </li>
+          <li class="breadcrumb-item active">Meus Relatórios</li>
+        </ol>
+
+        <div id="main" class="container-fluid" style="margin-top: 30px">
+ 
+  <div id="top" class="row">
+    <div class="col-sm-12 text-center">
+      <h2>Objetivos de Aprendizagem x Dimensão</h2>
+      <label> </label>
+    </div>
+    
+
+
+    <div class="col-sm-9">
+      <!-- <a href="#" class="btn btn-primary pull-right h2">Novo Mosaico</a> -->
+    </div>
+  </div> <!-- /#top -->
+
+ <div class="container">
+ <div class="row" style="width: 70%">
+        <div class="col-md-7 container">
+            <canvas id="productsChart"></canvas>
+        </div>
+    </div>
+ 
+  <hr />
+  </div>
+  
+  
+ </div> <!-- /#main --></div></div>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+var ctx = document.getElementById("productsChart");
+var dimensao_verbo = JSON.parse('{{ dimensao|safe }}');
+var qtde_obj = JSON.parse('{{ qtde|safe }}');
+var productsChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: dimensao_verbo,
+        datasets: [{
+            label: 'Dimensões',
+            data: qtde_obj,
+            backgroundColor: getRandomColor(qtde_obj),
+        }]
+    },
+    options: {
+        responsive: true,
+        animation: {
+            animateScale: true,
+            animateRotate: true
+        },
+        title:{
+          display: true,
+          text: 'Objetivos de Aprendizagem x Dimensão',
+          fontSize: 16
+        },
+
+        legend:{
+          position: 'bottom',
+        },
+
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+
+    }
+});
+
+function getRandomColor(data) {
+    datasize = data.length;
+
+    var graphColors = [];
+    i = 0;
+    while (i <= datasize) {
+        var randomR = Math.floor((Math.random() * 130) + 100);
+        var randomG = Math.floor((Math.random() * 130) + 100);
+        var randomB = Math.floor((Math.random() * 130) + 100);
+
+        var graphBackground = "rgb("
+                + randomR + ", "
+                + randomG + ", "
+                + randomB + ")";
+
+        if(!graphColors.includes(graphBackground)) {
+
+            graphColors.push(graphBackground);
+
+            i++;
+        }
+    }
+    return graphColors;
+};
+</script>
+
+{% endblock %}
+

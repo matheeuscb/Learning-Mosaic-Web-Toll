@@ -1,0 +1,105 @@
+{% extends "blank.html" %}
+
+{% block content %}
+{{canvas.id}}
+<input  id="id" type="hidden" value="{{canvas.id}}">
+
+<script>
+
+      var id = document.getElementById("id").value;
+      $.ajax({
+        url: '/dashboard/pegar_areas.html/',
+        data: {
+          'areas': areas
+        },
+        dataType: 'json',
+        success: function (data) {       
+            alert(areas);
+        }
+      });
+  </script>
+
+<div id="parent" class="content-wrapper" style="background-image: url('../static/img/mural1.jpeg');">
+
+  <canvas id="canvas" width="600" height="600" ></canvas>
+ </div> <!-- /#main -->
+
+<script type="text/javascript">
+var zoomIntensity = 0.2;
+
+var canvas = document.getElementById("canvas");
+var parent = document.getElementById("parent");
+canvas.width = parent.offsetWidth;
+canvas.height = parent.offsetHeight;
+var context = canvas.getContext("2d");
+
+
+/*function draw(){
+    // Clear screen to white.
+    context.fillStyle = "white";
+    context.fillRect(originx,originy,800/scale,600/scale);
+    // Draw the black square.
+    context.fillStyle = "black";
+    context.fillRect(50,50,100,100);
+}*/
+// Draw loop at 60FPS.
+//setInterval(draw, 1000/60);
+
+/*canvas.onmousewheel = function (event){
+    event.preventDefault();
+    // Get mouse offset.
+    var mousex = event.clientX - canvas.offsetLeft;
+    var mousey = event.clientY - canvas.offsetTop;
+    // Normalize wheel to +1 or -1.
+    var wheel = event.wheelDelta/120;
+
+    // Compute zoom factor.
+    var zoom = Math.exp(wheel*zoomIntensity);
+    
+    // Translate so the visible origin is at the context's origin.
+    context.translate(originx, originy);
+  
+    // Compute the new visible origin. Originally the mouse is at a
+    // distance mouse/scale from the corner, we want the point under
+    // the mouse to remain in the same place after the zoom, but this
+    // is at mouse/new_scale away from the corner. Therefore we need to
+    // shift the origin (coordinates of the corner) to account for this.
+    originx -= mousex/(scale*zoom) - mousex/scale;
+    originy -= mousey/(scale*zoom) - mousey/scale;
+    
+    // Scale it (centered around the origin due to the trasnslate above).
+    context.scale(zoom, zoom);
+    // Offset the visible origin to it's proper position.
+    context.translate(-originx, -originy);
+
+    // Update scale and others.
+    scale *= zoom;
+    visibleWidth = width / scale;
+    visibleHeight = height / scale;
+} */
+x = 110;
+</script>
+<input  id="foto" type="hidden" value="{{user.imagem.url}}">
+ <script type="text/javascript">
+    img = new Image();
+    img.src = document.getElementById("foto").value;
+    img.onload = function(){
+      tamanho = 150;
+      x = canvas.width/2 - tamanho/2;
+      y = canvas.height/2 - tamanho/2;
+      context.drawImage(img,x,y,tamanho,tamanho);
+    }
+  </script>
+
+{% for c in objetivos %}
+  <script type="text/javascript">
+    context.fillStyle = "red";
+    //context.fillRect(50+x,50,100,100);
+    x+=110;
+  </script>
+{% endfor %}
+
+{% endblock %}
+
+<!-- <img src="{{user.imagem.url}}" style="width:250px; height: 280px;"  class="img-responsive img-thumbnail" alt=""> -->
+

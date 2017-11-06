@@ -349,3 +349,13 @@ footer.sticky-footer {
 @media (min-width: 992px) {
   body.sidenav-toggled footer.sticky-footer {
     width: calc(100% - 55px); } }
+
+.mural {
+  background-image: url("../img/mural1.jpeg");
+  width: 400px;
+  height: 300px;
+  background-size: 100%;
+  position: absolute;
+  text-align: center;
+
+}

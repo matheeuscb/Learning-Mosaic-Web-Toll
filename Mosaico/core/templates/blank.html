@@ -12,17 +12,25 @@
     <meta name="author" content="">
     <title>Learning Mosaic Web Tool</title>
 
+
+
     <!-- Bootstrap core CSS -->
     <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
     <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
 
     <!-- Plugin CSS -->
     <link href="{% static 'vendor/datatables/dataTables.bootstrap4.css' %}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="{% static 'css/sb-admin.css' %}" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+
+  
 
   </head>
 
@@ -30,49 +38,125 @@
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-      <a class="navbar-brand" href="#">Learning Mosaic Web Tool</a>
+      <a class="navbar-brand" style="color: #fed136; font-family: 'Kaushan Script','Helvetica Neue',Helvetica,Arial,cursive;" >Learning Mosaic Web Tool</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+
+          <!-- <div class="container">
+            <div class="row profile">
+              <div class="col-md-3">
+                <div class="profile-sidebar">
+                  <!-- SIDEBAR USERPIC -->
+                  <!-- <div class="profile-userpic">
+                    <img src="{% static 'landing/img/about/1.jpg' %}" class="img-responsive" alt="">
+                  </div> -->
+                  <!-- END SIDEBAR USERPIC -->
+                 <!-- SIDEBAR USER TITLE -->
+               <!--  <div class="profile-usertitle">
+                  <h3>{{user.name}}</h3>
+                </div>
+              </div></div></div></div> --> 
+
           <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
-            <a class="nav-link" href="#">
-              <i class="fa fa-fw fa-dashboard"></i>
+            <a class="nav-link" href="{% url "inicio_dashboard" %}">
+              <i class="fa fa-fw fa-home"></i>
               <span class="nav-link-text">
-                Dashboard</span>
+                Início</span>
             </a>
           </li>
-          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-            <a class="nav-link" href="#">
-              <i class="fa fa-fw fa-area-chart"></i>
+
+          {% if perms.admin.educador or perms.admin.geral %}
+
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Canvas">
+            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+              <i class="fa fa-fw fa-graduation-cap"></i>
               <span class="nav-link-text">
-                Charts</span>
+                Área do Educador</span>
+            </a>
+            <ul class="sidenav-second-level collapse" id="collapseComponents">
+              <li>
+                <a href="{% url "listagem_canvas" %}">
+                <i class="fa fa-fw fa-id-card-o"></i>
+              <span class="nav-link-text">
+                Meus Canvas</span></a>
+              </li>
+             <li>
+                <a href="{% url "relatorios" %}">
+                <i class="fa fa-fw fa-bar-chart"></i>
+              <span class="nav-link-text">
+                Relatórios</span></a>
+              </li>
+              <li>
+                <a href="{% url "relatorio_canvas" %}">
+                <i class="fa fa-fw fa-bar-chart"></i>
+              <span class="nav-link-text">
+                Relatórios TESTE</span></a>
+              </li>
+            </ul>
+          </li>
+
+          <!-- <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Canvas">
+            <a class="nav-link" href="{% url "listagem_canvas" %}">
+              <i class="fa fa-fw fa-graduation-cap"></i>
+              <span class="nav-link-text">
+                Meus Canvas</span>
             </a>
           </li>
+
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Relatorios">
+            <a class="nav-link" href="#">
+              <i class="fa fa-fw fa-bar-chart"></i>
+              <span class="nav-link-text">
+               Relatórios </span>
+            </a>
+          </li> -->
+          {% endif %}
+
+          {% if perms.admin.aluno or perms.admin.geral %}
+          
+          <!-- <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Mosaicos">
+            <a class="nav-link" href="{% url "listagem_mosaicos" %}">
+              <i class="fa fa-fw fa-graduation-cap"></i>
+              <span class="nav-link-text">
+                Meus Mosaicos</span>
+            </a>
+          </li> -->
+<!-- 
           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
             <a class="nav-link" href="#">
               <i class="fa fa-fw fa-table"></i>
               <span class="nav-link-text">
                 Tables</span>
             </a>
-          </li>
+          </li> -->
           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-              <i class="fa fa-fw fa-wrench"></i>
+            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapse1Components" data-parent="#exampleAccordion">
+              <i class="fa fa-fw fa-graduation-cap"></i>
               <span class="nav-link-text">
-                Components</span>
+                Área do Aprendiz</span>
             </a>
-            <ul class="sidenav-second-level collapse" id="collapseComponents">
+            <ul class="sidenav-second-level collapse" id="collapse1Components">
               <li>
-                <a href="static-nav.html">Static Navigation</a>
+                <a href="{% url "listagem_mosaicos" %}">
+                <i class="fa fa-fw fa-sticky-note"></i>
+              <span class="nav-link-text">
+                Meus Mosaicos</span></a>
               </li>
               <li>
+                <a href="{% url "mural" %}">
+                <i class="fa fa-fw fa-sticky-note"></i>
+              <span class="nav-link-text">
+                Mural Teste</span></a>
+              </li>
+             <!--  <li>
                 <a href="#">Custom Card Examples</a>
-              </li>
+              </li> -->
             </ul>
           </li>
-          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
+          <!-- <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
             <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
               <i class="fa fa-fw fa-file"></i>
               <span class="nav-link-text">
@@ -119,14 +203,18 @@
               </li>
             </ul>
           </li>
+
           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
             <a class="nav-link" href="#">
               <i class="fa fa-fw fa-link"></i>
               <span class="nav-link-text">
                 Link</span>
             </a>
-          </li>
+          </li> -->
+          {% endif %}
+          
         </ul>
+        
         <ul class="navbar-nav sidenav-toggler">
           <li class="nav-item">
             <a class="nav-link text-center" id="sidenavToggler">
@@ -134,6 +222,7 @@
             </a>
           </li>
         </ul>
+
         <ul class="navbar-nav ml-auto">
           <!--<li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle mr-lg-2" href="#" id="messagesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -234,33 +323,34 @@
             </form>
           </li> -->
           <li class="nav-item">
+          <div class="btn-group open">
+            <a class="btn btn-primary" href="{% url "perfil" %}"><i class="fa fa-user fa-fw"></i> {{user.name}}</a>
+            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+              <!-- <span class="fa fa-caret-down" title="Toggle dropdown menu"></span> -->
+            </a>
+            <ul class="dropdown-menu">
+              <li> 
+                <a href="#" data-toggle="modal" data-target="#exampleModal">
+                  <i class="fa fa-sign-out fa-fw "></i> Sair </a>
+              </li>
+              <!-- <li><a href="#"><i class="fa fa-trash-o fa-fw"></i> Delete</a></li>
+              <li><a href="#"><i class="fa fa-ban fa-fw"></i> Ban</a></li>
+              <li class="divider"></li>
+              <li><a href="#"><i class="fa fa-unlock"></i> Make admin</a></li> -->
+              </ul>
+          </div>
+          </li>
+
+          <!-- <li class="nav-item">
             <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
               <i class="fa fa-fw fa-sign-out"></i>
               Logout</a>
-          </li>
+          </li> -->
         </ul>
       </div>
     </nav>
 
-    <div class="content-wrapper">
-
-      <div class="container-fluid">
-
-        <!-- Breadcrumbs -->
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a href="#">Inicio</a>
-          </li>
-          <li class="breadcrumb-item active">Área do Professor</li>
-        </ol>
-
-        <h1>Área do Professor</h1>
-
-      </div>
-      <!-- /.container-fluid -->
-
-    </div>
-    <!-- /.content-wrapper -->
+    {% block content %} {% endblock %} <!--usado para fazer um bloco que vai ser renderizado aqui dentro preservando as extremidades e mantendo a ideologia de não repetir código-->
 
     <footer class="sticky-footer">
       <div class="container">
@@ -296,10 +386,18 @@
       </div>
     </div>
 
+   
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.js"></script>
+    {% block javascript %} {% endblock %}
     <!-- Bootstrap core JavaScript -->
+
     <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'vendor/popper/popper.min.js' %}"></script>
     <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
 
     <!-- Plugin JavaScript -->
     <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
@@ -309,6 +407,8 @@
 
     <!-- Custom scripts for this template -->
     <script src="{% static 'js/sb-admin.min.js' %}"></script>
+
+
 
   </body>
 

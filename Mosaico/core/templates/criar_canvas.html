@@ -1,0 +1,70 @@
+{% extends "blank.html" %}
+
+{% block content %}
+
+
+<div class="content-wrapper">
+
+      <div class="container-fluid">
+
+        <!-- Breadcrumbs -->
+       <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#">Inicio</a>
+          </li>
+          <li class="breadcrumb-item active">Meus Canvas</li>
+        </ol>
+
+        <div id="main" class="container-fluid">
+          <h3 class="page-header">Adicionar Item</h3>
+
+          <!-- MENSAGEM DE ALERTA -->
+       <!--  <div class="row"> -->
+          {% if messages %}
+            {% for message in messages %}
+              {% if message.tags == 'error' %}
+                <div class="alert alert-danger alert-dismissible" role="alert">
+              {% endif %}
+                  <a class="panel-close close" data-dismiss="alert">×</a> 
+                  {{message}}
+                </div>
+              {% endfor %}
+          {% endif %}
+<!-- FIM MENSAGEM DE ALERTA -->
+
+          <form action="{% url "criar_canvas" %}" method="POST">
+            {% csrf_token %} 
+
+            <!-- area de campos do formulario -->
+            <div class="row">
+              <div class="form-group col-md-4">
+                <label for="nome_canvas">Nome do Canvas</label>
+                <input type="text" class="form-control" id="nome_canvas" name="nome_canvas">
+              </div>
+            </div>
+          <div>
+            <!-- <div class="form-group col-md-8"> -->
+              <label for="descricao_canvas">Descrição</label>
+              <!-- <input type="text" class="form-control" id="descricao_canvas" name="descricao_canvas"> -->
+              <textarea class="form-control col-md-8" rows="3"  id="descricao_canvas" name="descricao_canvas" ></textarea>
+            <!-- </div> --> 
+          </div>
+
+            <hr />
+            <div id="actions" class="row">
+              <div class="col-md-12">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <a href="{% url 'listagem_canvas' %}" class="btn btn-default">Cancelar</a> 
+              </div>
+            </div>
+          </form>
+
+        </div>
+
+      </div>
+      <!-- /.container-fluid -->
+
+</div>
+
+
+{% endblock %}

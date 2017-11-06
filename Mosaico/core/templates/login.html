@@ -1,77 +1,69 @@
-{% extends "base.html" %}
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
 
+  <head>
 
-{% block content %}
-<div class="content">
-    <div class="pure-g-r content-ribbon">
-        <div class="pure-u-1">
-        <div class="content">
-    <div class="pure-g-r content-ribbon">
-        <div class="pure-u-1">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <div id="content-container" class="container p-none">
-        <div class="lgn-container col-lg-8">
-            <!-- <form id="login-form" method="post" 
-                  action="{% url 'login' %}">
-                {% csrf_token %}
-                <table class="table">
-                    <tr>
-                        <td><label for="id_username">Usuário</label></td>
-                        <td><input id="id_username" name="username" 
-                                   type="text" class="form-control"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="id_password">Senha</label></td>
-                        <td><input id="id_password" name="password" 
-                                   type="password" class="form-control"></td>
-                    </tr>
-                </table>
-                {% if form.errors %}
-                    <p class=" label label-danger">
-                        ?next= /home
-                        Usuário e Senha Incorretos. 
-                        Por favor, tente novamente.
-                    </p>
-                {% endif %}
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>SB Admin - Start Bootstrap Template</title>
 
-                <input type="submit" value="Login" 
-                       class="btn btn-primary pull-right" />
-                <input type="hidden" name="next" value="{{ next }}" />
-            </form> -->
-             <form action="/login/" method="post">
-  <!-- <div class="imgcontainer">
-    <img src="img_avatar2.png" alt="Avatar" class="avatar">
-  </div> -->
-{% csrf_token %} 
-  <div class="container">
-    <label><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="username" required>
-</div>
-<br>
-<div>
-    <label><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="password" required>
-<br>
-</div>
-<div>
-    <button type="submit">Login</button>
-    <!-- <input type="checkbox" checked="checked"> Remember me -->
-  </div>
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- <div class="container" style="background-color:#f1f1f1">
-    <button type="button" class="cancelbtn">Cancel</button>
-    <span class="psw">Forgot <a href="#">password?</a></span>
-  </div> -->
-</form> 
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+    <!-- Custom styles for this template -->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+  </head>
+
+  <body class="bg-dark">
+
+    <div class="container">
+
+      <div class="card card-login mx-auto mt-5">
+        <div class="card-header">
+          Login
         </div>
+        <div class="card-body">
+          <form>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email address</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            </div>
+            <div class="form-group">
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input">
+                  Remember Password
+                </label>
+              </div>
+            </div>
+            <a class="btn btn-primary btn-block" href="index.html">Login</a>
+          </form>
+          <div class="text-center">
+            <a class="d-block small mt-3" href="register.html">Register an Account</a>
+            <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
+          </div>
+        </div>
+      </div>
     </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    
-{% endblock %}
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper/popper.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+  </body>
+
+</html>

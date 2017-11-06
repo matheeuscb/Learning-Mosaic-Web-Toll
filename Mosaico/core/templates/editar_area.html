@@ -1,0 +1,79 @@
+{% extends "blank.html" %}
+
+{% block content %}
+
+<!-- Falta mudar o botão e mudar o backend para que não mude o id e somente faça um update no objeto -->
+
+<div class="content-wrapper">
+
+      <div class="container-fluid">
+
+        <!-- Breadcrumbs -->
+       <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#">Inicio</a>
+          </li>
+          <li class="breadcrumb-item active">Meus Canvas</li>
+        </ol>
+
+        <div id="main" class="container-fluid">
+          <h3 class="page-header">Editar Item</h3>
+          <label></label>
+
+  <!-- MENSAGEM DE ALERTA -->
+       <!--  <div class="row"> -->
+          {% if messages %}
+            {% for message in messages %}
+            {% if message.tags == 'error' %}
+              <div class="alert alert-danger alert-dismissible" role="alert">
+            {% endif %}
+                <a class="panel-close close" data-dismiss="alert">×</a> 
+                {{message}}
+              </div>
+           {% endfor %}
+          {% endif %}
+        <!-- </div> -->
+<!-- FIM MENSAGEM DE ALERTA -->
+
+          <form action="{% url 'editar_area' id_area=area.id %}" method="POST">
+            {% csrf_token %} 
+
+            <!-- area de campos do formulario -->
+            <div class="row">
+            <div>
+              <div class="form-group col-md-8">
+                <label for="nome_area">Nome do Área</label>
+                <input value="{{area.nome_area}}" type="text" class="form-control" id="nome_area" name="nome_area">
+              </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group col-md-8">
+                <label for="dicas_area">Dicas</label>
+               <!--  <input value="{{canvas.descricao_canvas}}" type="text" class="form-control" id="descricao_canvas" name="descricao_canvas"> -->
+               <textarea class="form-control col-md-8" class="form-control" id="dicas_area" name="dicas_area">{{area.dicas_area}}</textarea>
+              </div>
+            </div>
+
+            
+           <!--  <hr /> -->
+           <label> </label>
+            <div class="row">
+              <div class="col-md-12">
+                <button type="submit" class="btn btn-primary">Atualizar</button>
+                <a href="{% url 'listagem_areas' id_canvas=area.id_canvas_id %}" class="btn btn-default">Cancelar</a>
+              </div>
+          </div>
+
+          </form>
+
+        </div>
+
+      </div>
+      <!-- /.container-fluid -->
+
+</div>
+
+
+{% endblock %}

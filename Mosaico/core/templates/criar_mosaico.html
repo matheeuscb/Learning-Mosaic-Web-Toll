@@ -1,0 +1,127 @@
+{% extends "blank.html" %}
+
+{% block content %}
+
+
+<div class="content-wrapper">
+
+      <div class="container-fluid">
+
+        <!-- Breadcrumbs -->
+       <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#">Inicio</a>
+          </li>
+          <li class="breadcrumb-item active">Meus Mosaicos</li>
+        </ol>
+
+        <div id="main" class="container-fluid">
+          <h3 class="page-header">Criar Mosaico</h3>
+
+<!-- MENSAGEM DE ALERTA -->
+       <!--  <div class="row"> -->
+          {% if messages %}
+            {% for message in messages %}
+              {% if message.tags == 'error' %}
+                <div class="alert alert-danger alert-dismissible" role="alert">
+              {% endif %}
+                  <a class="panel-close close" data-dismiss="alert">×</a> 
+                  {{message}}
+                </div>
+              {% endfor %}
+          {% endif %}
+<!-- FIM MENSAGEM DE ALERTA -->
+
+          <form action="{% url "criar_mosaico" %}" method="POST">
+            {% csrf_token %} 
+
+            <!-- Selecionar canvas-->
+            <div class="row">
+              <div class="form-group col-sm-12">
+                <label for="sel_canvas">Selecione o Canvas: </label>
+                <select name ="id_canvas" title="Digite o Código" class="selectpicker" data-live-search='true'>
+                {%for c in canvas %}
+                    {% if c.id not in lista_m %}
+                      <option value="{{c.id}}"> {{c.id}} - {{c.nome_canvas}} </option>
+                    {% endif %}
+                {% endfor %}
+                </select>
+              </div>
+             </div>
+
+
+
+  <!-- <div class="row">
+  <div class="form-group col-sm-12">
+     <label for="sel_canvas">Buscar por código: </label>
+           <div id="custom-search-input">
+                            <div class="input-group col-md-12">
+                                <input type="text" class="  search-query form-control" placeholder="Search" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-danger" type="button">
+                                        <span class=" glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        </div>
+
+</div> -->
+           
+
+            <hr />
+            <div id="actions" class="row">
+              <div class="col-md-12">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <a href="{% url 'listagem_mosaicos' %}" class="btn btn-default">Cancelar</a> 
+              </div>
+            </div>
+          </form>
+
+        </div>
+
+      </div>
+      <!-- /.container-fluid -->
+
+</div>
+
+<!-- <script>
+    $("#pegar_verbo").change(function () {
+      var nivel = $(this).val();
+
+      $.ajax({
+        url: '/dashboard/pegar_verbo.html/',
+        data: {
+          'nivel': nivel
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.verbo) {
+            alert(verbo[0].id);
+          }
+        }
+      });
+
+    });
+  </script> -->
+
+{% endblock %}
+
+<!-- $( "#novo_sdc_estado" ).change(function() {
+        var url = base_url + 'cadastros/sindicalizados/get_cidade/'+document.getElementById("novo_sdc_estado").value;
+        $.get(url, function(dataReturn) {
+            $('#cidades_novo').html(dataReturn);
+        });
+    });
+
+
+    public function get_cidade($uf) {
+        $cidades = $this->sm->get_cidades($uf);
+
+        $op = array();
+        $op[0] = '--------------';
+        foreach ($cidades as $c) {
+            $op[$c->id_cidade] = $c->nome;
+        }
+        echo '<td>' . form_dropdown('cidade', $op, 0, 'class="form-control large"') . '</td></tr>';
+    } -->

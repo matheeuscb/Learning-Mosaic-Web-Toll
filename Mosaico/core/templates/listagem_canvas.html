@@ -1,0 +1,130 @@
+{% extends "blank.html" %}
+
+{% block content %}
+
+
+<div class="content-wrapper">
+
+      <div class="container-fluid">
+
+        <!-- Breadcrumbs -->
+       <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#">Início</a>
+          </li>
+          <li class="breadcrumb-item active">Meus Canvas</li>
+        </ol>
+
+        <div id="main" class="container-fluid" style="margin-top: 30px">
+ 
+<!-- MENSAGEM DE ALERTA -->
+  <!-- <div class="row"> -->
+          {% if messages %}
+
+          {% for message in messages %}
+            {% if message.tags == 'error' %}
+              <div class="alert alert-danger alert-dismissible" role="alert">
+            {% endif %}
+                
+            {% if message.tags == 'success' %}
+               <div class="alert alert-success alert-dismissible" role="alert"> 
+            {% endif %}
+               <a class="panel-close close" data-dismiss="alert">×</a> 
+                
+                  {{message}}
+              </div>
+              {% endfor %}
+          {% endif %}
+        </div>
+<!-- FIM MENSAGEM DE ALERTA -->
+
+
+
+  <div id="top" class="row">
+    <div class="col-sm-3">
+      <h2>Canvas</h2>
+    </div>
+   <!--  <div class="col-sm-6">
+      
+      <div class="input-group h2">
+        <input name="data[search]" class="form-control" id="search" type="text" placeholder="Pesquisar Itens">
+        <span class="input-group-btn">
+          <button class="btn btn-primary" type="submit">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+        </span>
+      </div>
+      
+    </div> -->
+    <div class="col-sm-9">
+      <a href="{% url "criar_canvas" %}" class="btn btn-primary pull-right h2">Novo Canvas</a>
+    </div>
+  </div> <!-- /#top -->
+ 
+ 
+  <hr />
+  <div id="list" class="row">
+  
+  <div class="table-responsive col-md-12">
+    <table class="table table-striped" cellspacing="0" cellpadding="0">
+      <thead>
+        <tr>
+          <th style="text-align: center;">Código de Acesso</th>
+          <th style="text-align: center;">Nome</th>
+          <th style="text-align: center;">Descrição</th>
+          <th style="text-align: center;" class="actions">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for c in canvas %} 
+        <tr>
+          <td style="text-align: center;">{{c.id}}</td>
+          <td style="text-align: center;">{{c.nome_canvas}}</td>
+          <td style="text-align: center;">{{c.descricao_canvas}}</td>
+          <td style="text-align: center;" class="actions">
+            <a class="btn btn-success btn-xs" href="{% url 'listagem_areas' id_canvas=c.id %}">Áreas</a>
+            <a class="btn btn-warning btn-xs" href="{% url 'editar_canvas' id_canvas=c.id %}">Editar</a>
+            <a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal" onclick="localStorage.setItem('id_canvas',{{c.id}})">Excluir</a>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  
+  </div> <!-- /#list -->
+  
+  <!-- <div id="bottom" class="row"> 
+    <div class="col-md-12">
+      <ul class="pagination">
+        <li class="disabled"><a>&lt; Anterior</a></li>
+        <li class="disabled"><a>1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li class="next"><a href="#" rel="next">Próximo &gt;</a></li>
+      </ul>
+    </div>
+  </div> -->
+ </div> <!-- /#main -->
+
+<!-- Modal -->
+<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="modalLabel">Excluir Item</h4>
+      </div>
+      <div class="modal-body">
+        Deseja realmente excluir este item?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="window.location.href='/dashboard/excluir_canvas.html/'.concat(localStorage.getItem('id_canvas'))">Sim</button>
+  <button type="button" class="btn btn-default" data-dismiss="modal">N&atilde;o</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

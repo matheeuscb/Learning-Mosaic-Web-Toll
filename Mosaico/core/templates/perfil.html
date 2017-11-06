@@ -1,0 +1,163 @@
+{% extends "blank.html" %}
+
+{% block content %}
+
+<div class="content-wrapper">
+
+  <div class="container-fluid align-center">
+
+        <!-- Breadcrumbs -->
+       <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#">Início</a>
+          </li>
+          <li class="breadcrumb-item active">Perfil</li>
+        </ol>
+
+      <div id="main" class="container-fluid">
+          <h3 class="page-header">Editar Perfil</h3>
+          <h3> </h3>
+
+<!-- MENSAGEM DE ALERTA -->
+  <!-- <div class="row"> -->
+          {% if messages %}
+
+          {% for message in messages %}
+            {% if message.tags == 'error' %}
+              <div class="alert alert-danger alert-dismissible" role="alert">
+            {% endif %}
+                
+            {% if message.tags == 'success' %}
+               <div class="alert alert-success alert-dismissible" role="alert"> 
+            {% endif %}
+               <a class="panel-close close" data-dismiss="alert">×</a> 
+                
+                  {{message}}
+              </div>
+              {% endfor %}
+               </div>
+          {% endif %}
+       
+<!-- FIM MENSAGEM DE ALERTA -->
+
+
+        <div class="row">
+    <!-- left column -->
+
+    <div class="">
+    <form class="form-horizontal" action="perfil/" method="POST" enctype="multipart/form-data" role="form">
+      {% csrf_token %} 
+      <div class="text-center">
+
+        <img src="{{user.imagem.url}}" style="width:250px; height: 280px;"  class="img-responsive img-thumbnail" alt="">
+<!-- media/perfil/{{user.imagem}} -->
+        <!-- '/dashboard/excluir_objetivo.html/'.concat(localStorage.getItem('id_objetivo')) -->
+        <h6> </h6>
+        <h6>Escolher outro avatar...</h6>
+        <!-- <input type="file" class="text-center center-block well well-sm" name="imagem"> -->
+         <div>
+          <span class="input-group-btn">
+              <span class="btn btn-default btn-file"><input type="file" id="imagem" name="imagem"></span>
+          </span>
+                            <!-- <input type="text" class="form-control" readonly> -->
+        </div>
+    <img id='img-upload'/>
+      </div>
+    </div>
+
+
+    <!-- edit form column -->
+    <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
+      <!-- <div class="alert alert-info alert-dismissable">
+        <a class="panel-close close" data-dismiss="alert">×</a> 
+        <i class="fa fa-coffee"></i>
+        This is an <strong>.alert</strong>. Use this to show important messages to the user.
+      </div> -->
+
+
+      
+      <h3>Informações Pessoais</h3>
+      
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Nome:</label>
+          <div class="col-lg-8">
+            <input class="form-control" value="{{user.name}}" name="name" type="text">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Sobrenome:</label>
+          <div class="col-lg-8">
+            <input class="form-control" value="{{user.lastname}}" name="lastname" type="text">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">E-mail:</label>
+          <div class="col-lg-8">
+            <input class="form-control" value="{{user.email}}" name="email" type="text">
+          </div>
+        </div>
+       <!--  <div class="form-group">
+          <label class="col-lg-8 control-label">Permissão de Usuário:</label>
+          <div class="col-lg-8">
+            <div class="ui-select">
+              <select id="tipo" name="tipo" class="form-control">
+                <option value="1">Educador</option>
+                <option value="2">Aluno</option>
+                <option value="3">Geral</option>
+              </select>
+            </div>
+          </div>
+        </div>
+ -->
+        <div class="form-group">
+          <label class="col-lg-8 control-label">Tipo:</label>
+          <div class="col-lg-8">
+            <label class="radio-inline"> <input id="1" type="radio" name="tipo" value="1"> Educador </label>
+            <label> </label>
+            <label class="radio-inline"> <input id="2" type="radio" name="tipo" value="2"> Aluno </label>
+            <label> </label>
+            <label class="radio-inline"> <input id="3" type="radio" name="tipo" value="3"> Geral </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-3 control-label">Password:</label>
+          <div class="col-md-8">
+            <input class="form-control" value="{{user.password}}" name="password" type="password">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label">Confirm password:</label>
+          <div class="col-md-8">
+            <input class="form-control" value="{{user.password}}" name="confirm_password" type="password">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label"></label>
+          <div class="col-md-8">
+            <input class="btn btn-primary" value="Salvar Mudanças" type="submit">
+            <span></span>
+            <!-- <input class="btn btn-default" value="Cancelar" type="reset"> -->
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div></div>
+
+
+
+<script type="text/javascript">
+  window.onload=function(){
+  
+    document.getElementById({{user.groups.all.0.id}}).checked = true;
+
+  }
+
+
+</script>
+
+
+{% endblock %}
+

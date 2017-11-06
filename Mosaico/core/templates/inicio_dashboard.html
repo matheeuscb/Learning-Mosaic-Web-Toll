@@ -1,0 +1,39 @@
+{% extends "blank.html" %}
+
+{% block content %}
+
+
+{% load static from staticfiles %}
+<div class="content-wrapper">
+
+      <div class="container-fluid">
+
+        <!-- Breadcrumbs -->
+       <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url "inicio_dashboard" %}">Início</a>
+          </li>
+
+          {% if perms.admin.educador %}
+          <li class="breadcrumb-item active">Área do Educador</li>
+        </ol>
+        <h1 class="text-center">Área do Educador</h1>
+        {% endif %}
+
+        {% if perms.admin.aluno %}
+          <li class="breadcrumb-item active">Área do Aprendiz</li>
+        </ol>
+        <h1 class="text-center">Área do Aprendiz</h1>
+        {% endif %}
+
+        <div class="text-center"> 
+          <br>
+          <h1 class="navbar-brand js-scroll-trigger"> Seja Bem-Vindo(a) <b>{{user.name}}</b>! </h1>
+        </div>
+      </div>
+      <!-- /.container-fluid -->
+
+</div>
+
+
+{% endblock %}

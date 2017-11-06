@@ -30,7 +30,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
-    'django.contrib.admin',
+    #'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -62,7 +62,7 @@ WSGI_APPLICATION = 'Mosaico.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'teste3.sqlite3'),
     }
 }
 
@@ -87,6 +87,8 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = '/Mosaico/Mosaico/core/static/'
 
+MEDIA_URL = '/media/'
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'Mosaico', 'media')
 
 TEMPLATES = [
@@ -99,3 +101,6 @@ TEMPLATES = [
         },
     },
 ]
+
+
+AUTH_USER_MODEL = 'core.Usuario'

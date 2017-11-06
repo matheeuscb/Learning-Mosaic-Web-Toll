@@ -1,0 +1,186 @@
+{% extends "blank.html" %}
+
+{% block content %}
+
+
+<div class="content-wrapper">
+
+      <div class="container-fluid">
+
+        <!-- Breadcrumbs -->
+       <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#">Início</a>
+          </li>
+          <li class="breadcrumb-item active">Mural Canvas</li>
+        </ol>
+
+        <div id="main" class="container-fluid" style="margin-top: 30px">
+
+<!-- MENSAGEM DE ALERTA -->
+  <!-- <div class="row"> -->
+          {% if messages %}
+
+          {% for message in messages %}
+            {% if message.tags == 'error' %}
+              <div class="alert alert-danger alert-dismissible" role="alert">
+            {% endif %}
+                
+            {% if message.tags == 'success' %}
+               <div class="alert alert-success alert-dismissible" role="alert"> 
+            {% endif %}
+               <a class="panel-close close" data-dismiss="alert">×</a> 
+                
+                  {{message}}
+              </div>
+              {% endfor %}
+          {% endif %}
+        </div>
+<!-- FIM MENSAGEM DE ALERTA -->
+
+  <div id="top" class="row">
+    <div class="col-sm-8">
+      <h2>Meu Mosaico do Canvas {{canvas.nome_canvas}}</h2>
+    </div>
+   <!--  <div class="col-sm-6">
+      
+      <div class="input-group h2">
+        <input name="data[search]" class="form-control" id="search" type="text" placeholder="Pesquisar Itens">
+        <span class="input-group-btn">
+          <button class="btn btn-primary" type="submit">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+        </span>
+      </div>
+      
+    </div> -->
+    <!-- <div class="col-sm-9">
+      <a href="#" class="btn btn-primary pull-right h2">Editar Mosaico</a>
+    </div> -->
+     <div class="col-sm-4">
+      <a href="{% url 'criar_objetivo' id_mosaico=mosaico.0.id %}" class="btn btn-primary pull-right h2">Novo Objetivo</a>
+    </div>
+  </div> <!-- /#top -->
+ 
+ <!-- descricao_objetivos = models.TextField('Descrição', blank=True)
+  status_inicial = models.ForeignKey(Status, related_name='status_inicial', on_delete=models.SET_NULL, null=True) 
+  status_final = models.ForeignKey(Status, related_name='status_final', on_delete=models.SET_NULL, null=True)
+  id_mosaico = models.ForeignKey(Mosaico, on_delete=models.CASCADE)
+  id_verbo = models.ForeignKey(Verbo, on_delete=models.CASCADE) -->
+ 
+  <hr />
+  <div id="list" class="row">
+  
+  <div class="table-responsive col-md-12">
+    <table class="table table-striped" cellspacing="0" cellpadding="0">
+      <thead>
+        <tr>
+          <th style="text-align: center;">id</th>
+          <th style="text-align: center;">Área</th>
+          <th style="text-align: center;">Nível</th>
+          <th style="text-align: center;">Verbo</th>
+          <th style="text-align: center;">Objetivos</th>
+          <th style="text-align: center;">Status Inicial</th>
+          <th style="text-align: center;">Status Final</th>
+          <th style="text-align: center;">Dicas</th>
+          <th style="text-align: center;" class="actions">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for c in objetivos %} 
+        <tr>
+          <td style="text-align: center;">{{c.id}}</td>
+          <td style="text-align: center;">{{c.id_area.nome_area}}</td>
+          <td style="text-align: center;">{{c.id_verbo.id_nivel.tipo_nivel}}</td>
+          <td style="text-align: center;">{{c.id_verbo.nome_verbo}}</td>
+          <td style="text-align: center;">{{c.descricao_objetivos}}</td>
+          <td style="text-align: center;">{{c.status_inicial.nome_status}}</td>
+          <td style="text-align: center;">{{c.status_final.nome_status}}</td>
+          <td style="text-align: center;">{{c.dicas_objetivos}}</td>
+          <td style="text-align: center;" class="actions">
+          
+            <a class="btn btn-warning btn-xs" href="{% url 'editar_objetivo' id_objetivo=c.id %}">Editar</a>
+            <a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal" onclick="localStorage.setItem('id_objetivo',{{c.id}})">Excluir</a>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  
+  </div> <!-- /#list -->
+<div class="row">
+  <div class="col-sm-12">
+    <h2>Demais Mosaicos</h2>
+  </div>
+</div>
+  
+  <div id="list2" class="row">
+  <div class="table-responsive col-md-12">
+    <table class="table table-striped" cellspacing="0" cellpadding="0">
+      <thead>
+        <tr>
+          <th style="text-align: center;" >id</th>
+          <th style="text-align: center;" >Área</th>
+          <th style="text-align: center;" >Nivel</th>
+          <th style="text-align: center;" >Verbo</th>
+          <th style="text-align: center;">Objetivos</th>
+          <th style="text-align: center;">Status Inicial</th>
+          <th style="text-align: center;">Status Final</th>
+          <th style="text-align: center;">Dicas</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for c in outros %} 
+        <tr>
+          <td style="text-align: center;">{{c.id}}</td>
+          <td style="text-align: center;">{{c.id_area.nome_area}}</td>
+          <td style="text-align: center;">{{c.id_verbo.id_nivel.tipo_nivel}}</td>
+          <td style="text-align: center;">{{c.id_verbo.nome_verbo}}</td>
+          <td style="text-align: center;">{{c.descricao_objetivos}}</td>
+          <td style="text-align: center;">{{c.status_inicial.nome_status}}</td>
+          <td style="text-align: center;">{{c.status_final.nome_status}}</td>
+          <td style="text-align: center;">{{c.dicas_objetivos}}</td>
+          
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  
+  </div>
+  <!-- <div id="bottom" class="row"> 
+    <div class="col-md-12">
+      <ul class="pagination">
+        <li class="disabled"><a>&lt; Anterior</a></li>
+        <li class="disabled"><a>1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li class="next"><a href="#" rel="next">Próximo &gt;</a></li>
+      </ul>
+    </div>
+  </div> -->
+ </div> <!-- /#main -->
+
+<!-- Modal -->
+<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="modalLabel">Excluir Item</h4>
+      </div>
+      <div class="modal-body">
+        Deseja realmente excluir este item?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="window.location.href='/dashboard/excluir_objetivo.html/'.concat(localStorage.getItem('id_objetivo'))">Sim</button>
+  <button type="button" class="btn btn-default" data-dismiss="modal">N&atilde;o</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

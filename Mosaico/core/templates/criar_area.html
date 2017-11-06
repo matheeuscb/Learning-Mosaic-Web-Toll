@@ -1,0 +1,70 @@
+{% extends "blank.html" %}
+
+{% block content %}
+
+
+<div class="content-wrapper">
+
+      <div class="container-fluid">
+
+        <!-- Breadcrumbs -->
+       <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#">Inicio</a>
+          </li>
+          <li class="breadcrumb-item active">Areas</li>
+        </ol>
+
+        <div id="main" class="container-fluid">
+          <h3 class="page-header">Adicionar Área</h3>
+
+   <!-- MENSAGEM DE ALERTA -->
+       <!--  <div class="row"> -->
+          {% if messages %}
+           {% for message in messages %}
+            {% if message.tags == 'error' %}
+              <div class="alert alert-danger alert-dismissible" role="alert">
+            {% endif %}
+                <a class="panel-close close" data-dismiss="alert">×</a> 
+                {{message}}
+              </div>
+            {% endfor %}
+          {% endif %}
+<!-- FIM MENSAGEM DE ALERTA -->
+
+          <form action="{% url 'criar_area' id_canvas=canvas.id %}" method="POST">
+            {% csrf_token %} 
+
+            <!-- area de campos do formulario -->
+            <div class="row">
+              <div class="form-group col-md-4">
+                <label for="dicas_area">Nome da Área</label>
+                <input type="text" class="form-control" id="nome_area" name="nome_area">
+              </div>
+            </div>
+          <div>
+            <!-- <div class="form-group col-md-8"> -->
+              <label for="dicas_area">Dicas</label>
+              <!-- <input type="text" class="form-control" id="descricao_canvas" name="descricao_canvas"> -->
+              <textarea class="form-control col-md-8" rows="3"  id="dicas_area" name="dicas_area" ></textarea>
+            <!-- </div> --> 
+          </div>
+
+            <hr />
+            <div id="actions" class="row">
+              <div class="col-md-12">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <a href="{% url 'listagem_areas' id_canvas=canvas.id %}" class="btn btn-default">Cancelar</a> 
+              </div>
+            </div>
+          </form>
+
+        </div>
+
+      </div>
+      <!-- /.container-fluid -->
+
+</div>
+
+
+{% endblock %}

@@ -54,17 +54,44 @@
               <a class="nav-link js-scroll-trigger" href="#apoio">Apoio</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="{%url "lgteste" %}">login</a>
+              <a class="nav-link js-scroll-trigger" href="#" data-toggle="modal" data-target="#registro-modal">Cadastro</a>
+            </li>
+            <li class="nav-item">
+              <!-- <a class="nav-link js-scroll-trigger" href="#">login2</a> -->
+              <a class="nav-link js-scroll-trigger" href="#" data-toggle="modal" data-target="#login-modal">Login</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
 
+
     <!-- Header -->
     <header class="masthead">
       <div class="container">
         <div class="intro-text">
+
+  <!-- MENSAGEM DE ALERTA -->
+  <!-- <div class="row"> -->
+          {% if messages %}
+
+          {% for message in messages %}
+            {% if message.tags == 'error' %}
+              <div class="alert alert-danger alert-dismissible" role="alert">
+            {% endif %}
+                
+            {% if message.tags == 'success' %}
+               <div class="alert alert-success alert-dismissible" role="alert"> 
+            {% endif %}
+               <a class="panel-close close" data-dismiss="alert">×</a> 
+                
+                  {{message}}
+              </div>
+              {% endfor %}
+          {% endif %}
+        
+<!-- FIM MENSAGEM DE ALERTA -->
+
           <div class="intro-lead-in">Ferramenta de Apoio à Autorregulação da Aprendizagem!</div>
           <div class="intro-heading"> <br></div>
           <a class="btn btn-xl js-scroll-trigger" href="#services">Saiba Mais</a>
@@ -111,6 +138,8 @@
         </div>
       </div>
     </section>
+
+
 
     <!-- Portfolio Grid 
     <section class="bg-light" id="portfolio">
@@ -390,7 +419,7 @@
             <h2 class="section-heading">Apoio</h2>
             <h3 class="section-subheading text-muted"></h3>
         </div>
-        <div class="row">
+        <div class="row" style="margin-left: 350px;">
           <div class="col-lg-6">
             <a href="#">
               <img class="img-fluid d-block mx-auto" src="{% static 'landing/img/logos/labsoft.jpg' %}" alt="">
@@ -509,7 +538,7 @@
     <!-- Portfolio Modals -->
 
     <!-- Modal 1 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="close-modal" data-dismiss="modal">
@@ -522,7 +551,7 @@
               <div class="col-lg-8 mx-auto">
                 <div class="modal-body">
                   <!-- Project Details Go Here -->
-                  <h2>Project Name</h2>
+                  <!-- <h2>Project Name</h2>
                   <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
                   <img class="img-fluid d-block mx-auto" src="{% static 'landing/img/portfolio/01-full.jpg' %}" alt="">
                   <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
@@ -540,177 +569,207 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
-    <!-- Modal 2 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="close-modal" data-dismiss="modal">
-            <div class="lr">
-              <div class="rl"></div>
-            </div>
-          </div>
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-8 mx-auto">
-                <div class="modal-body">
-                  <!-- Project Details Go Here -->
-                  <h2>Project Name</h2>
-                  <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                  <img class="img-fluid d-block mx-auto" src="{% static 'landing/img/portfolio/02-full.jpg' %}" alt="">
-                  <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                  <ul class="list-inline">
-                    <li>Date: January 2017</li>
-                    <li>Client: Explore</li>
-                    <li>Category: Graphic Design</li>
-                  </ul>
-                  <button class="btn btn-primary" data-dismiss="modal" type="button">
-                    <i class="fa fa-times"></i>
-                    Close Project</button>
+
+<!-- MODAL LOGIN -->
+    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+          <div class="modal-dialog">
+                <div class="loginmodal-container">
+                   <!--  <h1>Acesso ao Sistema</h1><br>
+                  <form>
+                    <input type="text" name="user" placeholder="Username">
+                    <input type="password" name="pass" placeholder="Password">
+                    <input type="submit" name="login" class="login loginmodal-submit" value="Login">
+                  </form>
+                    
+                  <div class="login-help">
+                    <a href="#">Register</a> - <a href="#">Forgot Password</a>
+                  </div> -->
+                  <div class="content">
+    <div class="pure-g-r content-ribbon">
+        <div class="pure-u-1">
+        <div class="content">
+    <div class="pure-g-r content-ribbon">
+        <div class="pure-u-1">
+
+    <div id="content-container" class="container p-none">
+        <div class="lgn-container col-lg-8">
+            <!-- <form id="login-form" method="post" 
+                  action="#">
+                {% csrf_token %}
+                <table class="table">
+                    <tr>
+                        <td><label for="id_username">Usuário</label></td>
+                        <td><input id="id_username" name="username" 
+                                   type="text" class="form-control"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="id_password">Senha</label></td>
+                        <td><input id="id_password" name="password" 
+                                   type="password" class="form-control"></td>
+                    </tr>
+                </table>
+                {% if form.errors %}
+                    <p class=" label label-danger">
+                        ?next= /home
+                        Usuário e Senha Incorretos. 
+                        Por favor, tente novamente.
+                    </p>
+                {% endif %}
+
+                <input type="submit" value="Login" 
+                       class="btn btn-primary pull-right" />
+                <input type="hidden" name="next" value="{{ next }}" />
+            </form> -->
+            <form action="/login/" method="post">
+  <!-- <div class="imgcontainer">
+    <img src="img_avatar2.png" alt="Avatar" class="avatar">
+  </div> -->
+                {% csrf_token %} 
+                <div class="row"> 
+                 <div class="modal-title text-center">
+                    <h1><b>Login</b></h1><br>
                 </div>
-              </div>
+                </div>
+                <div class="row">
+                    <label><b>Usuário</b></label>
+                    <input type="text" placeholder="Digite seu Usuário" name="username" required>
+                <!-- </div> -->
+                <br>
+                <!-- <div> -->
+                    <label><b>Senha</b></label>
+                    <input type="password" placeholder="Digite sua Senha" name="password" required>
+                    <br>
+                <!-- </div>
+                <div> -->
+                <div>
+                  <br> 
+                  <br> 
+                </div>
+                <br>
+
+                <div class="col-md-12">
+                <div>
+                <label> </label>
+                </div>
+                    <button type="submit" class="btn btn-info btn-block">Login</button>
+                    <!-- <input type="checkbox" checked="checked"> Remember me -->
+                </div>
+                </div>
+
+                <!-- <div class="container" style="background-color:#f1f1f1">
+                    <button type="button" class="cancelbtn">Cancel</button>
+                    <span class="psw">Forgot <a href="#">password?</a></span>
+                </div> -->
+                <!-- </div> -->
+            </form> 
+
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- Registro Modal -->
+    <div class="modal fade" id="registro-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+          <div class="modal-dialog">
+          <div class="modal-content">
+                <div class="container">
+                   <!--  <h1>Acesso ao Sistema</h1><br>
+                  <form>
+                    <input type="text" name="user" placeholder="Username">
+                    <input type="password" name="pass" placeholder="Password">
+                    <input type="submit" name="login" class="login loginmodal-submit" value="Login">
+                  </form>
+                    
+                  <div class="login-help">
+                    <a href="#">Register</a> - <a href="#">Forgot Password</a>
+                  </div> -->
+                  <div class="container">
+        <div class="row centered-form">
+        <!-- <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4"> -->
+          <div class="panel panel-default">
+            <div class="panel-heading">
+            <h3> </h3>
+              <h3 class="panel-title">Cadastro</h3>
+            </div>
+            <div class="panel-body">
+              <form role="form" action="registro/" method="POST" enctype="multipart/form-data">
+              {% csrf_token %} 
+                <div class="row">
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="text" name="name" id="name" class="form-control input-sm" placeholder="Nome">
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="text" name="lastname" id="lastname" class="form-control input-sm" placeholder="Sobrenome">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <input type="email" name="email" id="email" class="form-control input-sm" placeholder="E-mail">
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Senha">
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="Confirme a Senha">
+                    </div>
+                  </div>
+                </div>
+               <div class="form-group">
+                  <h6> Tipo </h6>
+                  <label class="radio-inline"> <input type="radio" name="tipo" value="1"> Educador </label>
+                  <label> </label>
+                  <label class="radio-inline"> <input type="radio" name="tipo" value="2"> Aluno </label>
+                  <label> </label>
+                  <label class="radio-inline"> <input type="radio" name="tipo" value="3"> Geral </label>
+                </div>
+
+                <!-- <div class="container"> -->
+                    <!-- <div class="col-md-6"> -->
+                      <div class="form-group">
+                        <h6> Imagem </h6>
+                          <div class="input-group">
+                            <span class="input-group-btn">
+                              <span class="btn btn-default btn-file"><input type="file" id="imagem" name="imagem"></span>
+                            </span>
+                            <!-- <input type="text" class="form-control" readonly> -->
+                          </div>
+                        <img id='img-upload'/>
+                   <!--  </div> -->
+                 <!--  </div> -->
+                </div>
+
+
+                <input type="submit" value="Cadastrar" class="btn btn-info btn-block">
+                <h3> </h3>
+              
+              </form>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-    <!-- Modal 3 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="close-modal" data-dismiss="modal">
-            <div class="lr">
-              <div class="rl"></div>
-            </div>
-          </div>
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-8 mx-auto">
-                <div class="modal-body">
-                  <!-- Project Details Go Here -->
-                  <h2>Project Name</h2>
-                  <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                  <img class="img-fluid d-block mx-auto" src="{% static 'landing/img/portfolio/03-full.jpg' %}" alt="">
-                  <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                  <ul class="list-inline">
-                    <li>Date: January 2017</li>
-                    <li>Client: Finish</li>
-                    <li>Category: Identity</li>
-                  </ul>
-                  <button class="btn btn-primary" data-dismiss="modal" type="button">
-                    <i class="fa fa-times"></i>
-                    Close Project</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
+</div>
 
-    <!-- Modal 4 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="close-modal" data-dismiss="modal">
-            <div class="lr">
-              <div class="rl"></div>
-            </div>
-          </div>
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-8 mx-auto">
-                <div class="modal-body">
-                  <!-- Project Details Go Here -->
-                  <h2>Project Name</h2>
-                  <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                  <img class="img-fluid d-block mx-auto" src="{% static 'landing/img/portfolio/04-full.jpg' %}" alt="">
-                  <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                  <ul class="list-inline">
-                    <li>Date: January 2017</li>
-                    <li>Client: Lines</li>
-                    <li>Category: Branding</li>
-                  </ul>
-                  <button class="btn btn-primary" data-dismiss="modal" type="button">
-                    <i class="fa fa-times"></i>
-                    Close Project</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Modal 5 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="close-modal" data-dismiss="modal">
-            <div class="lr">
-              <div class="rl"></div>
-            </div>
-          </div>
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-8 mx-auto">
-                <div class="modal-body">
-                  <!-- Project Details Go Here -->
-                  <h2>Project Name</h2>
-                  <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                  <img class="img-fluid d-block mx-auto" src="{% static 'landing/img/portfolio/05-full.jpg' %}" alt="">
-                  <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                  <ul class="list-inline">
-                    <li>Date: January 2017</li>
-                    <li>Client: Southwest</li>
-                    <li>Category: Website Design</li>
-                  </ul>
-                  <button class="btn btn-primary" data-dismiss="modal" type="button">
-                    <i class="fa fa-times"></i>
-                    Close Project</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Modal 6 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="close-modal" data-dismiss="modal">
-            <div class="lr">
-              <div class="rl"></div>
-            </div>
-          </div>
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-8 mx-auto">
-                <div class="modal-body">
-                  <!-- Project Details Go Here -->
-                  <h2>Project Name</h2>
-                  <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                  <img class="img-fluid d-block mx-auto" src="{% static 'landing/img/portfolio/06-full.jpg' %}" alt="">
-                  <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                  <ul class="list-inline">
-                    <li>Date: January 2017</li>
-                    <li>Client: Window</li>
-                    <li>Category: Photography</li>
-                  </ul>
-                  <button class="btn btn-primary" data-dismiss="modal" type="button">
-                    <i class="fa fa-times"></i>
-                    Close Project</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- Bootstrap core JavaScript -->
     <script src="{% static 'landing/vendor/jquery/jquery.min.js' %}"></script>
