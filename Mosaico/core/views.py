@@ -331,13 +331,13 @@ def criar_objetivo(request, id_mosaico):
 		if (request.method == 'POST'):
 			descricao_objetivos = request.POST ['descricao_objetivos']
 			status_inicial = request.POST ['status_inicial']
-			# status_final = request.POST ['status_final']
+			status_final = '2'
 			# id_mosaico = request.POST ['id_mosaico']
 			id_area = request.POST ['id_area']
 			id_verbo = request.POST ['id_verbo']
 			dicas_objetivos = request.POST ['dicas_objetivos']
 
-			objetivo = Objetivos_De_Aprendizagem(descricao_objetivos=descricao_objetivos, status_inicial_id=status_inicial, status_final_id=status_inicial, id_mosaico_id=id_mosaico, id_verbo_id=id_verbo, id_area_id=id_area, dicas_objetivos=dicas_objetivos)
+			objetivo = Objetivos_De_Aprendizagem(descricao_objetivos=descricao_objetivos, status_inicial_id=status_inicial, status_final_id=status_final, id_mosaico_id=id_mosaico, id_verbo_id=id_verbo, id_area_id=id_area, dicas_objetivos=dicas_objetivos)
 			# if canvas:
 			# print id_verbo,'oi'
 			try:
@@ -563,7 +563,7 @@ def mural (request):
 
 	id_canvas = '7'
 
-	lista ="select obj.id, obj.descricao_objetivos, obj.id_verbo_id, obj.status_final_id, obj.status_inicial_id from core_objetivos_de_aprendizagem as 'obj' inner join core_mosaico as 'mosaico' on mosaico.id=obj.id_mosaico_id where mosaico.id_canvas_id=%s and mosaico.id_usuario_id=%s"
+	lista ="select obj.id, obj.descricao_objetivos, obj.id_verbo_id, verbo.nome_verbo, obj.id_area_id, area.nome_area, obj.status_final_id, obj.status_inicial_id, status.nome_status, obj.dicas_objetivos from core_objetivos_de_aprendizagem as 'obj' inner join core_mosaico as 'mosaico' on mosaico.id=obj.id_mosaico_id  inner join core_areas as area on area.id = obj.id_area_id inner join core_verbo as verbo on verbo.id = obj.id_verbo_id inner join core_status as status on status.id = obj.status_inicial_id where mosaico.id_canvas_id=%s and mosaico.id_usuario_id=%s"
 	outros = "select obj.id, obj.descricao_objetivos, obj.id_verbo_id, obj.status_final_id, obj.status_inicial_id from core_objetivos_de_aprendizagem as 'obj' inner join core_mosaico as 'mosaico' on mosaico.id=obj.id_mosaico_id where mosaico.id_canvas_id=%s and mosaico.id_usuario_id!=%s"
 
 	data = {'canvas': Canvas.objects.get(id=id_canvas), 'mosaico': Mosaico.objects.filter(id_usuario_id=request.user.id).filter(id_canvas=id_canvas), 

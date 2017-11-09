@@ -1,36 +1,19 @@
 {% extends "blank.html" %}
 
 {% block content %}
+
 {{canvas.id}}
 <input  id="id" type="hidden" value="{{canvas.id}}">
+<input id="tamimg" value="../static/img/mural1.jpeg" type="hidden">
 
-<script>
-
-      var id = document.getElementById("id").value;
-      $.ajax({
-        url: '/dashboard/pegar_areas.html/',
-        data: {
-          'areas': areas
-        },
-        dataType: 'json',
-        success: function (data) {       
-            alert(areas);
-        }
-      });
-  </script>
-
-<div id="parent" class="content-wrapper" style="background-image: url('../static/img/mural1.jpeg');">
-
-  <canvas id="canvas" width="600" height="600" ></canvas>
- </div> <!-- /#main -->
+  <canvas id="canvas" width="600" height="600" style="background-image: url('../static/img/mural1.jpeg');" ></canvas>
+ 
 
 <script type="text/javascript">
 var zoomIntensity = 0.2;
-
 var canvas = document.getElementById("canvas");
-var parent = document.getElementById("parent");
-canvas.width = parent.offsetWidth;
-canvas.height = parent.offsetHeight;
+canvas.width = 1366;
+canvas.height = 768;
 var context = canvas.getContext("2d");
 
 
@@ -77,29 +60,182 @@ var context = canvas.getContext("2d");
     visibleWidth = width / scale;
     visibleHeight = height / scale;
 } */
-x = 110;
 </script>
 <input  id="foto" type="hidden" value="{{user.imagem.url}}">
  <script type="text/javascript">
     img = new Image();
     img.src = document.getElementById("foto").value;
     img.onload = function(){
-      tamanho = 150;
+      tamanho = 160;
       x = canvas.width/2 - tamanho/2;
       y = canvas.height/2 - tamanho/2;
       context.drawImage(img,x,y,tamanho,tamanho);
     }
-  </script>
+    cnt = 0;
+    var cores = ["","gold","tomato","limegreen","darkorange","darkturquoise"];
+    var areas = [];
+    var dx = [0,0,-1,1];
+    var dy = [-1,1,0,0];
+    var aux = 1;
+    areawidth = 100;
+    areaheight = 55;
+    gapx = 240;
+    gapy = 130;
+    x1 =  gapx+55;
+    y1 = gapy;
 
+    x2 = canvas.width- gapx;
+    y2 = canvas.height-gapy;
+
+    x2 -= areawidth;
+    y2 -= areaheight;
+
+    x3 = canvas.width- gapx;
+    y3 = gapy;
+
+    x3 -= areawidth;
+
+   
+    x4 = gapx+55;
+    y4 = canvas.height-gapy;
+
+    y4 -=areaheight;
+
+    side = 0;
+
+    function wrapText(context, text, x, y, maxWidth, lineHeight) {
+        var words = text.split(' ');
+        var line = '';
+
+        for(var n = 0; n < words.length; n++) {
+          var testLine = line + words[n] + ' ';
+          var metrics = context.measureText(testLine);
+          var testWidth = metrics.width;
+          if (testWidth > maxWidth && n > 0) {
+            context.fillText(line, x, y);
+            line = words[n] + ' ';
+            y += lineHeight;
+          }
+          else {
+            line = testLine;
+          }
+        }
+        context.fillText(line, x, y);
+      }
+
+  </script>
 {% for c in objetivos %}
+<input  id="area{{forloop.counter}}" type="hidden" value="{{c.id_area_id}}">
+<input  id="nomearea{{forloop.counter}}" type="hidden" value="{{c.nome_area}}">
+<input  id="corpostit{{forloop.counter}}" type="hidden" value="{{c.status_final_id}}">
+<input  id="nomestatus{{forloop.counter}}" type="hidden" value="{{c.nome_status}}">
+<input  id="nomeverbo{{forloop.counter}}" type="hidden" value="{{c.nome_verbo}}">
+<input  id="objetivo{{forloop.counter}}" type="hidden" value="{{c.descricao_objetivos}}">
+<input  id="dicas{{forloop.counter}}" type="hidden" value="{{c.dicas_objetivos}}">
   <script type="text/javascript">
-    context.fillStyle = "red";
-    //context.fillRect(50+x,50,100,100);
-    x+=110;
+    idarea = document.getElementById("area"+(aux).toString()).value;
+    nomearea = document.getElementById("nomearea"+(aux).toString()).value;
+    corpostit = document.getElementById("corpostit"+(aux).toString()).value;
+   nomestatus = document.getElementById("nomestatus"+(aux).toString()).value;
+    nomeverbo = document.getElementById("nomeverbo"+(aux).toString()).value;
+    objetivo = document.getElementById("objetivo"+(aux++).toString()).value;
+    if(areas[idarea] == undefined){
+      if(cnt == 0){
+        areas[idarea] = {x: x1,y:y1, cont: 0};
+        context.fillStyle = "royalblue";
+        context.fillRect(x1,y1,areawidth,areaheight);
+        context.font = "14pt sans-serif";
+        context.fillStyle = "white";
+        context.textAlign = "center";
+        context.fillText(nomearea,areas[idarea].x+areawidth/2,areas[idarea].y+areaheight/2);
+      }
+      else if(cnt == 1){
+        areas[idarea] = {x: x2,y:y2, cont: 0};
+        context.fillStyle = "royalblue";
+        context.fillRect(x2,y2,areawidth,areaheight);
+        context.font = "14pt sans-serif";
+        context.fillStyle = "white";
+       context.textAlign = "center";
+        context.fillText(nomearea,areas[idarea].x+areawidth/2,areas[idarea].y+areaheight/2);
+       }
+       else if(cnt == 2){
+        areas[idarea] = {x: x3,y:y3, cont: 0};
+        context.fillStyle = "royalblue";
+        context.fillRect(x3,y3,areawidth,areaheight);
+        context.font = "14pt sans-serif";
+        context.fillStyle = "white";
+       context.textAlign = "center";
+        context.fillText(nomearea,areas[idarea].x+areawidth/2,areas[idarea].y+areaheight/2);
+       }
+       else{
+          areas[idarea] = {x: x4,y:y4, cont: 0};
+        context.fillStyle = "royalblue";
+        context.fillRect(x4,y4,areawidth,areaheight);
+        context.font = "14pt sans-serif";
+        context.fillStyle = "white";
+       context.textAlign = "center";
+        context.fillText(nomearea,areas[idarea].x+areawidth/2,areas[idarea].y+areaheight/2);
+       }
+       cnt++;
+    }
+     context.font = "9pt sans-serif";
+      context.textAlign = "start";
+    if(areas[idarea].cont == 0){
+      context.fillStyle = cores[corpostit];
+      topx = areas[idarea].x;
+      topy = areas[idarea].y - 120;
+      context.fillRect(topx,topy,100,100);
+            context.fillStyle = "black";
+      context.fillText(nomestatus,topx+10,topy+20);
+      context.fillText(nomeverbo,topx+10,topy+40);
+      wrapText(context,objetivo,topx+10,topy+60,90,14);
+     // context.fillText("teste",topx+10,topy+80);
+    }
+    else if(areas[idarea].cont == 1){
+      context.fillStyle = cores[corpostit];
+      topx = areas[idarea].x;
+      topy = areas[idarea].y + 20 + areaheight;
+      context.fillRect(areas[idarea].x,areas[idarea].y + 20 + areaheight,100,100);
+            context.fillStyle = "black";
+      context.fillText(nomestatus,topx+10,topy+20);
+      context.fillText(nomeverbo,topx+10,topy+40);
+      wrapText(context,objetivo,topx+10,topy+60,90,14);
+    }
+    else if(areas[idarea].cont == 2){
+      context.fillStyle = cores[corpostit];
+      topx = areas[idarea].x - 120;
+      topy = areas[idarea].y;
+      context.fillRect(areas[idarea].x-120,areas[idarea].y,100,100);
+            context.fillStyle = "black";
+      context.fillText(nomestatus,topx+10,topy+20);
+      context.fillText(nomeverbo,topx+10,topy+40);
+      wrapText(context,objetivo,topx+10,topy+60,90,14);
+    }
+    else if(areas[idarea].cont == 3){
+      context.fillStyle = cores[corpostit];
+      topx = areas[idarea].x + 20 + areawidth;
+      topy = areas[idarea].y;
+      context.fillRect(areas[idarea].x + areawidth + 20,areas[idarea].y,100,100);
+            context.fillStyle = "black";
+      context.fillText(nomestatus,topx+10,topy+20);
+      context.fillText(nomeverbo,topx+10,topy+40);
+      wrapText(context,objetivo,topx+10,topy+60,90,14);
+    }
+    areas[idarea].cont++;
   </script>
 {% endfor %}
+
 
 {% endblock %}
 
 <!-- <img src="{{user.imagem.url}}" style="width:250px; height: 280px;"  class="img-responsive img-thumbnail" alt=""> -->
 
+{% block javascript %}
+<script type="text/javascript">
+    $ (document).ready(function() {
+        $("body").toggleClass("sidenav-toggled");
+        $(".navbar-sidenav .nav-link-collapse").addClass("collapsed");
+        $(".navbar-sidenav .sidenav-second-level, .navbar-sidenav .sidenav-third-level").removeClass("show");
+    });
+    </script>
+{% endblock %}

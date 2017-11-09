@@ -75,7 +75,7 @@
     <table class="table table-striped" cellspacing="0" cellpadding="0">
       <thead>
         <tr>
-          <th style="text-align: center;">id</th>
+          <!-- <th style="text-align: center;">id</th> -->
           <th style="text-align: center;">Área</th>
           <th style="text-align: center;">Nível</th>
           <th style="text-align: center;">Verbo</th>
@@ -89,7 +89,7 @@
       <tbody>
       {% for c in objetivos %} 
         <tr>
-          <td style="text-align: center;">{{c.id}}</td>
+          <!-- <td style="text-align: center;">{{c.id}}</td> -->
           <td style="text-align: center;">{{c.id_area.nome_area}}</td>
           <td style="text-align: center;">{{c.id_verbo.id_nivel.tipo_nivel}}</td>
           <td style="text-align: center;">{{c.id_verbo.nome_verbo}}</td>
