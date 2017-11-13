@@ -345,7 +345,7 @@ def criar_objetivo(request, id_mosaico):
 				# return redirect('dashboard/criar_objetivo.html')
 				messages.add_message(request, messages.SUCCESS, 'Objetivo Salvo Com Sucesso!')
 				aux = Mosaico.objects.filter(id=id_mosaico)
-				url='/dashboard/listagem_mural.html/'+str(aux[0].id_canvas_id)
+				url='/dashboard/listagem_objetivos.html/'+str(aux[0].id_canvas_id)
 				return redirect(url)
 				# canvas = None
 
@@ -414,7 +414,7 @@ def excluir_objetivo(request,id_objetivo):
 				messages.add_message(request, messages.ERROR, 'Erro ao Excluir Objetivo!')
 
 
-		url='/dashboard/listagem_mural.html/'+str(mosaico.id_canvas_id)
+		url='/dashboard/listagem_objetivos.html/'+str(mosaico.id_canvas_id)
 		return redirect(url)
 
 		# return redirect('dashboard/listagem_mosaicos.html')
@@ -457,7 +457,7 @@ def editar_objetivo(request,id_objetivo):
 					
 					messages.add_message(request, messages.SUCCESS, 'Objetivo Editado Com Sucesso!')
 
-					url='/dashboard/listagem_mural.html/'+str(mosaico.id_canvas_id)
+					url='/dashboard/listagem_objetivos.html/'+str(mosaico.id_canvas_id)
 					return redirect(url)
 					
 				except:
