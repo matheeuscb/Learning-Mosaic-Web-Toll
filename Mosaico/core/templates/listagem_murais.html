@@ -65,7 +65,7 @@
           <!-- <td style="text-align: center;">{{c.id}}</td> -->
           <td style="text-align: center;">{{c.name}} {{c.lastname}}</td>
           <td style="text-align: center;" class="actions">
-            <a class="btn btn-success btn-xs" href="#">Ver Mural</a>
+            <a class="btn btn-success btn-xs" href="{% url 'mural' id_canvas=canvas.id id_user=c.id %}">Ver Mural</a>
             <!-- <a class="btn btn-warning btn-xs" href="{% url 'editar_area' id_area=c.id %}">Editar</a>
             <a class="btn btn-danger btn-xs"  href="{% url 'excluir_area' id_area=c.id %}" data-toggle="modal" data-target="#delete-modal" onclick="localStorage.setItem('id_area',{{c.id}})">Excluir</a> -->
           </td>

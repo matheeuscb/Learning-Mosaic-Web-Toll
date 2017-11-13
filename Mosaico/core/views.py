@@ -387,10 +387,10 @@ def listagem_murais(request,id_canvas):
 	if(request.user.is_authenticated()):
 
 		# lista = "select * from core_objetivos_de_aprendizagem as 'obj' inner join core_mosaico as 'mosaico' on mosaico.id=obj.id_mosaico_id where mosaico.id_canvas_id=%s and mosaico.id_usuario_id=%s"
-		lista ="select usu.id, usu.name, usu.lastname, mosaico.id from core_mosaico as 'mosaico' inner join core_usuario as usu on usu.id = mosaico.id_usuario_id where mosaico.id_canvas_id=%s"
+		lista ="select usu.id, usu.name, usu.lastname, mosaico.id as 'idmosaico' from core_mosaico as 'mosaico' inner join core_usuario as usu on usu.id = mosaico.id_usuario_id where mosaico.id_canvas_id=%s and mosaico.id_usuario_id!=%s"
 		outros = "select obj.id, obj.descricao_objetivos, obj.id_verbo_id, obj.status_final_id, obj.status_inicial_id from core_objetivos_de_aprendizagem as 'obj' inner join core_mosaico as 'mosaico' on mosaico.id=obj.id_mosaico_id where mosaico.id_canvas_id=%s and mosaico.id_usuario_id!=%s"
 
-		data = {'canvas': Canvas.objects.get(id=id_canvas), 'murais': Mosaico.objects.raw(lista,[id_canvas])}
+		data = {'canvas': Canvas.objects.get(id=id_canvas), 'murais': Mosaico.objects.raw(lista,[id_canvas, request.user.id])}
 
 		#print data['murais'][0].id
 		# print data['objetivos'][1].id
@@ -576,16 +576,18 @@ def pegar_areas(request):
 
 	return JsonResponse(data)
 
-def mural (request,id_canvas):
+def mural (request,id_canvas, id_user=None):
 
 	# id_canvas = '7'
+	if id_user==None:
+		id_user = request.user.id
 
 	lista ="select obj.id, obj.descricao_objetivos, obj.id_verbo_id, verbo.nome_verbo, obj.id_area_id, area.nome_area, obj.status_final_id, obj.status_inicial_id, status.nome_status, obj.dicas_objetivos from core_objetivos_de_aprendizagem as 'obj' inner join core_mosaico as 'mosaico' on mosaico.id=obj.id_mosaico_id  inner join core_areas as area on area.id = obj.id_area_id inner join core_verbo as verbo on verbo.id = obj.id_verbo_id inner join core_status as status on status.id = obj.status_inicial_id where mosaico.id_canvas_id=%s and mosaico.id_usuario_id=%s"
 	outros = "select obj.id, obj.descricao_objetivos, obj.id_verbo_id, obj.status_final_id, obj.status_inicial_id from core_objetivos_de_aprendizagem as 'obj' inner join core_mosaico as 'mosaico' on mosaico.id=obj.id_mosaico_id where mosaico.id_canvas_id=%s and mosaico.id_usuario_id!=%s"
 
 	data = {'canvas': Canvas.objects.get(id=id_canvas), 'mosaico': Mosaico.objects.filter(id_usuario_id=request.user.id).filter(id_canvas=id_canvas), 
-	'objetivos': Objetivos_De_Aprendizagem.objects.raw(lista,[id_canvas,request.user.id]), 'outros': Objetivos_De_Aprendizagem.objects.raw(outros,[id_canvas,request.user.id]),
-	'auxiliar': Mosaico.objects.all(), 'areas': Areas.objects.filter(id_canvas_id=id_canvas)}
+	'objetivos': Objetivos_De_Aprendizagem.objects.raw(lista,[id_canvas,id_user]), 'outros': Objetivos_De_Aprendizagem.objects.raw(outros,[id_canvas,request.user.id]),
+	'auxiliar': Mosaico.objects.all(), 'areas': Areas.objects.filter(id_canvas_id=id_canvas), 'usuario': Usuario.objects.get(id=id_user)}
 
 	return render(request, 'mural.html', data)
 

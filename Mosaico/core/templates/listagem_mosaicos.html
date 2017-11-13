@@ -84,7 +84,7 @@
           {% endfor %} -->
           <td style="text-align: center;" class="actions">
             <a class="btn btn-success btn-xs" href="{% url 'listagem_objetivos' id_canvas=c.id_canvas.id%}">Meus Objetivos</a>
-            <a class="btn btn-success btn-xs" href="{% url 'mural' id_canvas=c.id_canvas.id%}">Meu Mosaico</a>
+            <a class="btn btn-success btn-xs" href="{% url 'mural' id_canvas=c.id_canvas.id id_user=user.id %}">Meu Mosaico</a>
             <a class="btn btn-success btn-xs" href="{% url 'listagem_murais' id_canvas=c.id_canvas.id%}">Outros Mosaicos</a>
             <!-- <a class="btn btn-warning btn-xs" href="{% url 'editar_canvas' id_canvas=c.id %}">Editar</a>
             <a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal" onclick="localStorage.setItem('id_canvas',{{c.id}})">Excluir</a> -->
