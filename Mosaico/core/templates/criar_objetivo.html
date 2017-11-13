@@ -10,7 +10,7 @@
         <!-- Breadcrumbs -->
        <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="#">Inicio</a>
+            <a href="{% url "inicio_dashboard" %}">Inicio</a>
           </li>
           <li class="breadcrumb-item active">Meus Mosaicos</li>
         </ol>
@@ -52,7 +52,7 @@
              <div class="row">
               <div class="form-group col-sm-4">
                 <label for="id_area">Área: </label>
-                <select name="id_area">
+                <select name="id_area" required>
                 {%for c in area %}
                   {% if mosaico.0.id_canvas_id = c.id_canvas_id %}
                     <option value="{{c.id}}"> {{c.nome_area}} </option>
@@ -66,8 +66,8 @@
             <!-- Selecionar Verbo -->
             <div class="row">
               <div class="form-group col-sm-4">
-                <label for="id_verbo">Selecione o verbo: </label>
-                <select class= "form-control" data id="pegar_verbo" name="id_verbo">
+                <label for="id_verbo">Selecione o verbo: </label> <a onclick="alert('Selecione o verbo que definirá a ação do seu objetivo.')"><i class="fa fa-fw fa-info-circle"></i></a>
+                <select class= "form-control" data id="pegar_verbo" name="id_verbo" required>
                 {%for nivel, verbo in drop.items %}
                   <optgroup label="{{nivel.tipo_nivel}}">
                   {% for v in verbo %} 
@@ -83,8 +83,8 @@
             <!-- Escrever Objetivos de Aprendizagem -->
             <div class="row">
               <div class="form-group col-md-8">
-                <label for="descricao_objetivos">Objetivo de Aprendizagem:</label>
-                <input type="text" class="form-control" id="descricao_objetivos" name="descricao_objetivos">
+                <label for="descricao_objetivos">Objetivo de Aprendizagem:</label> <a onclick="alert('Descreva seu objetivo de aprendizagem.')"><i class="fa fa-fw fa-info-circle"></i></a>
+                <input type="text" class="form-control" id="descricao_objetivos" name="descricao_objetivos" required>
               </div>
             </div>
 
@@ -92,21 +92,22 @@
              <div class="row">
               <div class="form-group col-sm-4">
                 <label for="status_inicial">Status: </label>
-                <select name="status_inicial">
+                <select name="status_inicial" required>
                 <!-- {%for c in status %}
                   <option value="{{c.id}}"> {{c.nome_status}} </option>
                 {% endfor %} -->
                   <option value="1"> Criado no Início </option>
                   <option value="5"> Criado Durante </option>
                 </select>
+                <a onclick="alert('Seu objetivo está sendo criado no início do curso ou durante o curso?')"><i class="fa fa-fw fa-info-circle"></i></a>
               </div>
             </div>
 
             <div>
             <!-- <div class="form-group col-md-8"> -->
-              <label for="dicas_objetivos">Dicas:</label>
+              <label for="dicas_objetivos">Dicas:</label> <a onclick="alert('Defina as dicas que te ajudarão a alcançar o objetivo de aprendizagem em questão.')"><i class="fa fa-fw fa-info-circle"></i></a>
               <!-- <input type="text" class="form-control" id="descricao_canvas" name="descricao_canvas"> -->
-              <textarea class="form-control col-md-8" rows="3"  id="dicas_objetivos" name="dicas_objetivos" ></textarea>
+              <textarea class="form-control col-md-8" rows="3"  id="dicas_objetivos" name="dicas_objetivos" required></textarea>
             <!-- </div> --> 
           </div>
  <!-- 
@@ -133,8 +134,8 @@
             <div id="actions" class="row">
               <div class="col-md-12">
                 <button type="submit" class="btn btn-primary">Salvar</button>
-                <!-- <a href="{% url 'listagem_mural' }" class="btn btn-default">Cancelar</a>  -->
-                <a href="{% url 'listagem_mural' id_canvas=mosaico.0.id_canvas_id %}" class="btn btn-default">Cancelar</a> 
+                <!-- <a href="{% url 'listagem_objetivos' }" class="btn btn-default">Cancelar</a>  -->
+                <a href="{% url 'listagem_objetivos' id_canvas=mosaico.0.id_canvas_id %}" class="btn btn-default">Cancelar</a> 
  
               </div>
             </div>

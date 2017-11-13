@@ -10,9 +10,12 @@
         <!-- Breadcrumbs -->
        <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="#">Início</a>
+            <a href="{% url "inicio_dashboard" %}">Início</a>
           </li>
-          <li class="breadcrumb-item active">Meus Relatórios</li>
+          <li class="breadcrumb-item active">
+            <a href="{% url "relatorio_canvas" %}">Meus Relatórios</a>
+          </li>
+           <li class="breadcrumb-item active">Gráficos</li>
         </ol>
 
         <div id="main" class="container-fluid" style="margin-top: 30px">
@@ -31,14 +34,20 @@
   </div> <!-- /#top -->
 
  <div class="container">
- <div class="row" style="width: 50%">
-        <div class="col-md-7 container">
+ <div class="row" style="width: 100%">
+        <div class="col-md-4 container col-md-offset-4"> 
+        <center>
             <canvas id="productsChart"></canvas>
+        </center>
         </div>
     </div>
  
   <hr />
   </div>
+ 
+  <hr />
+  </div>
+  <a class="btn btn-primary pull-right h2" id="save-btn" >Exportar como Imagem</a>
   
   
  </div> <!-- /#main --></div></div>
@@ -76,6 +85,22 @@ var productsChart = new Chart(ctx, {
           position: 'bottom',
         },
 
+        tooltips: {
+            callbacks: {
+                label: function(tooltipItem, data) {
+                    var allData = data.datasets[tooltipItem.datasetIndex].data;
+                    var tooltipLabel = data.labels[tooltipItem.index];
+                    var tooltipData = allData[tooltipItem.index];
+                    var total = 0;
+                    for (var i in allData) {
+                        total += allData[i];
+                    }
+                    var tooltipPercentage = Math.round((tooltipData / total) * 100);
+                    return tooltipLabel + ': ' + tooltipData + ' (' + tooltipPercentage + '%)';
+                }
+            }
+        }
+
         // scales: {
         //     yAxes: [{
         //         ticks: {
@@ -111,6 +136,12 @@ function getRandomColor(data) {
     }
     return graphColors;
 };
+
+$("#save-btn").click(function() {
+      $("#productsChart").get(0).toBlob(function(blob) {
+        saveAs(blob, "grafico_status_inicial.png");
+    });
+});
 </script>
 
 {% endblock %}

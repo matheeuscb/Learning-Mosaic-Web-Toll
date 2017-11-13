@@ -12,16 +12,19 @@
           <li class="breadcrumb-item">
             <a href="{% url "inicio_dashboard" %}">Início</a>
           </li>
-          <li class="breadcrumb-item active">Áreas</li>
+          <li class="breadcrumb-item">
+            <a href="{% url "listagem_mosaicos" %}">Mosaicos</a>
+          </li>
+          <li class="breadcrumb-item active">Murais</li>
         </ol>
 
         <div class="col-sm-11">
-      <a href="{% url 'criar_area' id_canvas=canvas.id %}" class="btn btn-primary pull-right h2">Nova Área</a>
+      <!-- <a href="{% url 'criar_area' id_canvas=canvas.id %}" class="btn btn-primary pull-right h2">Nova Área</a> -->
     </div>
   </div> <!-- /#top -->
 
         <div id="main" class="container-fluid">
-          <h3 class="page-header">Áreas do Canvas {{canvas.nome_canvas}}</h3>
+          <h3 class="page-header">Outros Murais do Canvas {{canvas.nome_canvas}}</h3>
           <label> </label>
 
 <!-- MENSAGEM DE ALERTA -->
@@ -52,21 +55,19 @@
       <thead>
         <tr>
           <!-- <th style="text-align: center;">id </th> -->
-          <th style="text-align: center;">Nome</th>
-          <th style="text-align: center;">Dicas</th>
+          <th style="text-align: center;">Nome do Aprendiz</th>
           <th style="text-align: center;" class="actions">Ações</th>
         </tr>
       </thead>
       <tbody>
-      {% for c in areas %} 
+      {% for c in murais %} 
         <tr>
           <!-- <td style="text-align: center;">{{c.id}}</td> -->
-          <td style="text-align: center;">{{c.nome_area}}</td>
-          <td style="text-align: center;">{{c.dicas_area}}</td>
+          <td style="text-align: center;">{{c.name}} {{c.lastname}}</td>
           <td style="text-align: center;" class="actions">
-            <!-- <a class="btn btn-success btn-xs" href="{% url 'listagem_areas' id_canvas=c.id %}">Áreas</a> -->
-            <a class="btn btn-warning btn-xs" href="{% url 'editar_area' id_area=c.id %}">Editar</a>
-            <a class="btn btn-danger btn-xs"  href="{% url 'excluir_area' id_area=c.id %}" data-toggle="modal" data-target="#delete-modal" onclick="localStorage.setItem('id_area',{{c.id}})">Excluir</a>
+            <a class="btn btn-success btn-xs" href="#">Ver Mural</a>
+            <!-- <a class="btn btn-warning btn-xs" href="{% url 'editar_area' id_area=c.id %}">Editar</a>
+            <a class="btn btn-danger btn-xs"  href="{% url 'excluir_area' id_area=c.id %}" data-toggle="modal" data-target="#delete-modal" onclick="localStorage.setItem('id_area',{{c.id}})">Excluir</a> -->
           </td>
         </tr>
       {% endfor %}

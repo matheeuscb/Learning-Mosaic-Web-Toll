@@ -1,6 +1,6 @@
 {% load static from staticfiles %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
   <head>
 
@@ -652,12 +652,12 @@
                 </div>
                 <div class="row">
                     <label><b>Usuário</b></label>
-                    <input type="text" placeholder="Digite seu Usuário" name="username" required>
+                    <input type="text" placeholder="Digite seu E-mail" name="username" required maxlength="50">
                 <!-- </div> -->
                 <br>
                 <!-- <div> -->
                     <label><b>Senha</b></label>
-                    <input type="password" placeholder="Digite sua Senha" name="password" required>
+                    <input type="password" placeholder="Digite sua Senha" name="password" required maxlength="8">
                     <br>
                 <!-- </div>
                 <div> -->
@@ -696,6 +696,22 @@
 </div>
 </div>
 
+<!-- confirmação de senhas -->
+<script type="text/javascript">
+      
+      function validacao(){
+        senha1 = document.getElementById("password").value;
+        senha2 = document.getElementById("password_confirmation").value;
+        // alert(senha1 + " " + senha2);
+
+        if (senha1!=senha2){
+          // alert('As Senhas Não Batem!');
+          return false;
+        }
+        return true;
+      }
+</script>
+
 <!-- Registro Modal -->
     <div class="modal fade" id="registro-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
           <div class="modal-dialog">
@@ -721,40 +737,40 @@
               <h3 class="panel-title">Cadastro</h3>
             </div>
             <div class="panel-body">
-              <form role="form" action="registro/" method="POST" enctype="multipart/form-data">
+              <form role="form" onsubmit="return validacao()" action="registro/" method="POST" enctype="multipart/form-data">
               {% csrf_token %} 
                 <div class="row">
                   <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
-                      <input type="text" name="name" id="name" class="form-control input-sm" placeholder="Nome">
+                      <input type="text" required name="name" id="name" class="form-control input-sm" placeholder="Nome" maxlength="20">
                     </div>
                   </div>
                   <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
-                      <input type="text" name="lastname" id="lastname" class="form-control input-sm" placeholder="Sobrenome">
+                      <input type="text" required name="lastname" id="lastname" class="form-control input-sm" placeholder="Sobrenome" maxlength="20">
                     </div>
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <input type="email" name="email" id="email" class="form-control input-sm" placeholder="E-mail">
+                  <input type="email" required name="email" id="email" class="form-control input-sm" placeholder="E-mail" maxlength="50">
                 </div>
 
                 <div class="row">
                   <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
-                      <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Senha">
+                      <input type="password" required name="password" id="password" class="form-control input-sm" placeholder="Senha" maxlength="8">
                     </div>
                   </div>
                   <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
-                      <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="Confirme a Senha">
+                      <input type="password" required name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="Confirme a Senha" maxlength="8">
                     </div>
                   </div>
                 </div>
                <div class="form-group">
-                  <h6> Tipo </h6>
-                  <label class="radio-inline"> <input type="radio" name="tipo" value="1"> Educador </label>
+                  <h6> Tipo <a onclick="alert('Escolha o tipo de perfil que mais combina com você.')"><i class="fa fa-fw fa-info-circle"></i></a> </h6> 
+                  <label class="radio-inline"> <input type="radio" required name="tipo" value="1"> Educador </label>
                   <label> </label>
                   <label class="radio-inline"> <input type="radio" name="tipo" value="2"> Aprendiz </label>
                   <label> </label>
@@ -764,10 +780,10 @@
                 <!-- <div class="container"> -->
                     <!-- <div class="col-md-6"> -->
                       <div class="form-group">
-                        <h6> Imagem </h6>
+                        <h6> Imagem <a onclick="alert('Escolha uma imagem para o seu perfil. Pode ser uma foto ou um avatar que represente você.')"><i class="fa fa-fw fa-info-circle"></i></a></h6>
                           <div class="input-group">
                             <span class="input-group-btn">
-                              <span class="btn btn-default btn-file"><input type="file" id="imagem" name="imagem"></span>
+                              <span class="btn btn-default btn-file"><input type="file" required id="imagem" name="imagem"></span>
                             </span>
                             <!-- <input type="text" class="form-control" readonly> -->
                           </div>
@@ -804,6 +820,8 @@
 
     <!-- Custom scripts for this template -->
     <script src="{% static 'landing/js/agency.min.js' %}"></script>
+
+    
 
   </body>
 

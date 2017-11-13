@@ -10,13 +10,13 @@
         <!-- Breadcrumbs -->
        <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="#">Inicio</a>
+            <a href="{% url "inicio_dashboard" %}">Inicio</a>
           </li>
           <li class="breadcrumb-item active">Meus Mosaicos</li>
         </ol>
 
         <div id="main" class="container-fluid">
-          <h3 class="page-header">Criar Mosaico</h3>
+          <h3 class="page-header">Criar Mosaico</h3> 
 
 <!-- MENSAGEM DE ALERTA -->
        <!--  <div class="row"> -->
@@ -39,13 +39,14 @@
             <div class="row">
               <div class="form-group col-sm-12">
                 <label for="sel_canvas">Selecione o Canvas: </label>
-                <select name ="id_canvas" title="Digite o Código" class="selectpicker" data-live-search='true'>
+                <select name ="id_canvas" title="Digite o Código" class="selectpicker" data-live-search='true' required>
                 {%for c in canvas %}
                     {% if c.id not in lista_m %}
                       <option value="{{c.id}}"> {{c.id}} - {{c.nome_canvas}} </option>
                     {% endif %}
                 {% endfor %}
                 </select>
+                <a onclick="alert('Digite o código do canvas que foi informado pelo Educador.')"><i class="fa fa-fw fa-info-circle"></i></a>
               </div>
              </div>
 

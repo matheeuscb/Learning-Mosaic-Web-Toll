@@ -10,7 +10,7 @@
         <!-- Breadcrumbs -->
        <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="#">Inicio</a>
+            <a href="{% url "inicio_dashboard" %}">Inicio</a>
           </li>
           <li class="breadcrumb-item active">Areas</li>
         </ol>
@@ -39,14 +39,16 @@
             <div class="row">
               <div class="form-group col-md-4">
                 <label for="dicas_area">Nome da Área</label>
-                <input type="text" class="form-control" id="nome_area" name="nome_area">
+                  <a onclick="alert('Defina um nome para a Área do seu Canvas.')"><i class="fa fa-fw fa-info-circle"></i></a>
+                <input type="text" class="form-control" id="nome_area" name="nome_area" required>
               </div>
             </div>
           <div>
             <!-- <div class="form-group col-md-8"> -->
               <label for="dicas_area">Dicas</label>
+                <a onclick="alert('Adicione dicas relacionadas a Área pois isso ajudará o Aprendiz a alcançar seus objetivos de aprendizagem.')"><i class="fa fa-fw fa-info-circle"></i></a>
               <!-- <input type="text" class="form-control" id="descricao_canvas" name="descricao_canvas"> -->
-              <textarea class="form-control col-md-8" rows="3"  id="dicas_area" name="dicas_area" ></textarea>
+              <textarea class="form-control col-md-8" rows="3"  id="dicas_area" name="dicas_area" required></textarea>
             <!-- </div> --> 
           </div>
 

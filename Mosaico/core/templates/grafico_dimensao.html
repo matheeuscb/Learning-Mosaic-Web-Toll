@@ -10,9 +10,12 @@
         <!-- Breadcrumbs -->
        <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="#">Início</a>
+            <a href="{% url "inicio_dashboard" %}">Início</a>
           </li>
-          <li class="breadcrumb-item active">Meus Relatórios</li>
+          <li class="breadcrumb-item active">
+            <a href="{% url "relatorio_canvas" %}">Meus Relatórios</a>
+          </li>
+           <li class="breadcrumb-item active">Gráficos</li>
         </ol>
 
         <div id="main" class="container-fluid" style="margin-top: 30px">
@@ -31,14 +34,18 @@
   </div> <!-- /#top -->
 
  <div class="container">
- <div class="row" style="width: 70%">
-        <div class="col-md-7 container">
+ <div class="row" style="width: 100%">
+        <div class="col-md-8 container col-md-offset-2"> 
+        <center>
             <canvas id="productsChart"></canvas>
+        </center>
         </div>
     </div>
  
   <hr />
   </div>
+  <a class="btn btn-primary pull-right h2" id="save-btn" >Exportar como Imagem</a>
+  
   
   
  </div> <!-- /#main --></div></div>
@@ -111,6 +118,13 @@ function getRandomColor(data) {
     }
     return graphColors;
 };
+// var url_base64jp = document.getElementById("productsChart").toDataURL("image/jpg");
+// link1.href = url_base64jp;
+$("#save-btn").click(function() {
+      $("#productsChart").get(0).toBlob(function(blob) {
+        saveAs(blob, "grafico_dimensao.png");
+    });
+});
 </script>
 
 {% endblock %}

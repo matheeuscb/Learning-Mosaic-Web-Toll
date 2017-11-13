@@ -364,7 +364,7 @@ def criar_objetivo(request, id_mosaico):
 
 
 
-def listagem_mural(request,id_canvas):
+def listagem_objetivos(request,id_canvas):
 	if(request.user.is_authenticated()):
 
 		# lista = "select * from core_objetivos_de_aprendizagem as 'obj' inner join core_mosaico as 'mosaico' on mosaico.id=obj.id_mosaico_id where mosaico.id_canvas_id=%s and mosaico.id_usuario_id=%s"
@@ -378,7 +378,24 @@ def listagem_mural(request,id_canvas):
 		# print data['objetivos'][0].id
 		# print data['objetivos'][1].id
 
-		return render(request, 'listagem_mural.html', data)
+		return render(request, 'listagem_objetivos.html', data)
+
+	else:
+		return render(request, 'home.html')
+
+def listagem_murais(request,id_canvas):
+	if(request.user.is_authenticated()):
+
+		# lista = "select * from core_objetivos_de_aprendizagem as 'obj' inner join core_mosaico as 'mosaico' on mosaico.id=obj.id_mosaico_id where mosaico.id_canvas_id=%s and mosaico.id_usuario_id=%s"
+		lista ="select usu.id, usu.name, usu.lastname, mosaico.id from core_mosaico as 'mosaico' inner join core_usuario as usu on usu.id = mosaico.id_usuario_id where mosaico.id_canvas_id=%s"
+		outros = "select obj.id, obj.descricao_objetivos, obj.id_verbo_id, obj.status_final_id, obj.status_inicial_id from core_objetivos_de_aprendizagem as 'obj' inner join core_mosaico as 'mosaico' on mosaico.id=obj.id_mosaico_id where mosaico.id_canvas_id=%s and mosaico.id_usuario_id!=%s"
+
+		data = {'canvas': Canvas.objects.get(id=id_canvas), 'murais': Mosaico.objects.raw(lista,[id_canvas])}
+
+		#print data['murais'][0].id
+		# print data['objetivos'][1].id
+
+		return render(request, 'listagem_murais.html', data)
 
 	else:
 		return render(request, 'home.html')
@@ -559,9 +576,9 @@ def pegar_areas(request):
 
 	return JsonResponse(data)
 
-def mural (request):
+def mural (request,id_canvas):
 
-	id_canvas = '7'
+	# id_canvas = '7'
 
 	lista ="select obj.id, obj.descricao_objetivos, obj.id_verbo_id, verbo.nome_verbo, obj.id_area_id, area.nome_area, obj.status_final_id, obj.status_inicial_id, status.nome_status, obj.dicas_objetivos from core_objetivos_de_aprendizagem as 'obj' inner join core_mosaico as 'mosaico' on mosaico.id=obj.id_mosaico_id  inner join core_areas as area on area.id = obj.id_area_id inner join core_verbo as verbo on verbo.id = obj.id_verbo_id inner join core_status as status on status.id = obj.status_inicial_id where mosaico.id_canvas_id=%s and mosaico.id_usuario_id=%s"
 	outros = "select obj.id, obj.descricao_objetivos, obj.id_verbo_id, obj.status_final_id, obj.status_inicial_id from core_objetivos_de_aprendizagem as 'obj' inner join core_mosaico as 'mosaico' on mosaico.id=obj.id_mosaico_id where mosaico.id_canvas_id=%s and mosaico.id_usuario_id!=%s"

@@ -11,7 +11,7 @@
         <!-- Breadcrumbs -->
        <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="#">Inicio</a>
+            <a href="{% url "inicio_dashboard" %}">Inicio</a>
           </li>
           <li class="breadcrumb-item active">Meus Canvas</li>
         </ol>
@@ -43,7 +43,7 @@
             <div>
               <div class="form-group col-md-8">
                 <label for="nome_canvas">Nome do Canvas</label>
-                <input value="{{canvas.nome_canvas}}" type="text" class="form-control" id="nome_canvas" name="nome_canvas">
+                <input value="{{canvas.nome_canvas}}" type="text" class="form-control" id="nome_canvas" name="nome_canvas" required>
               </div>
               </div>
             </div>
@@ -52,7 +52,7 @@
               <div class="form-group col-md-8">
                 <label for="descricao_canvas">Descrição</label>
                <!--  <input value="{{canvas.descricao_canvas}}" type="text" class="form-control" id="descricao_canvas" name="descricao_canvas"> -->
-               <textarea class="form-control col-md-8" class="form-control" id="descricao_canvas" name="descricao_canvas">{{canvas.descricao_canvas}}</textarea>
+               <textarea class="form-control col-md-8" class="form-control" id="descricao_canvas" name="descricao_canvas" required>{{canvas.descricao_canvas}}</textarea>
               </div>
             </div>
 
