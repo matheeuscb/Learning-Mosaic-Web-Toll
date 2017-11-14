@@ -603,7 +603,7 @@ def grafico_status_final(request,id_canvas):
 		lista ="select objt.id, objt.status_final_id, count(objt.status_final_id) as qtde from core_objetivos_de_aprendizagem as objt inner join core_mosaico as mosaico on mosaico.id=objt.id_mosaico_id inner join core_canvas as canvas on canvas.id=mosaico.id_canvas_id where mosaico.id_canvas_id=%s group by status_final_id"
 		objetivos = list (Objetivos_De_Aprendizagem.objects.raw(lista,[id_canvas]))
 
-		data = {'status': json.dumps([objt.status_final.nome_status for objt in objetivos]), 'qtde': json.dumps([objt.qtde for objt in objetivos])}
+		data = {'status': json.dumps([objt.status_final.nome_status for objt in objetivos]), 'qtde': json.dumps([objt.qtde for objt in objetivos]), 'canvas': Canvas.objects.get(id=id_canvas)}
 		# print objetivos
 		# print data
 		return render(request, 'grafico_status_final.html', data)
@@ -617,9 +617,9 @@ def grafico_status_inicial(request,id_canvas):
 		lista ="select objt.id, objt.status_inicial_id, count(objt.status_inicial_id) as qtde from core_objetivos_de_aprendizagem as objt inner join core_mosaico as mosaico on mosaico.id=objt.id_mosaico_id inner join core_canvas as canvas on canvas.id=mosaico.id_canvas_id where mosaico.id_canvas_id=%s group by status_inicial_id"
 		objetivos = list (Objetivos_De_Aprendizagem.objects.raw(lista,[id_canvas]))
 
-		data = {'status': json.dumps([objt.status_inicial.nome_status for objt in objetivos]), 'qtde': json.dumps([objt.qtde for objt in objetivos])}
-		print objetivos
-		print data
+		data = {'status': json.dumps([objt.status_inicial.nome_status for objt in objetivos]), 'qtde': json.dumps([objt.qtde for objt in objetivos]), 'canvas': Canvas.objects.get(id=id_canvas)}
+		# print objetivos
+		# print data
 		return render(request, 'grafico_status_inicial.html', data)
 
 	else:
@@ -631,8 +631,8 @@ def grafico_dimensao(request,id_canvas):
 		lista ="select objt.id, verbo.id_nivel_id, nivel.tipo_nivel, count(objt.id_verbo_id) as qtde from core_objetivos_de_aprendizagem as objt inner join core_mosaico as mosaico on mosaico.id=objt.id_mosaico_id inner join core_canvas as canvas on canvas.id=mosaico.id_canvas_id  inner join core_verbo as verbo on verbo.id=objt.id_verbo_id inner join core_nivel as nivel on nivel.id=verbo.id_nivel_id  where mosaico.id_canvas_id=%s group by id_nivel_id"
 		objetivos = list (Objetivos_De_Aprendizagem.objects.raw(lista,[id_canvas]))
 
-		data = {'dimensao': json.dumps([objt.tipo_nivel for objt in objetivos]), 'qtde': json.dumps([objt.qtde for objt in objetivos])}
-		print objetivos
+		data = {'dimensao': json.dumps([objt.tipo_nivel for objt in objetivos]), 'qtde': json.dumps([objt.qtde for objt in objetivos]), 'canvas': Canvas.objects.get(id=id_canvas)}
+		# print objetivos
 		# print data
 		# print objt.id_verbo_id.id_nivel_id.tipo_nivel
 		return render(request, 'grafico_dimensao.html', data)

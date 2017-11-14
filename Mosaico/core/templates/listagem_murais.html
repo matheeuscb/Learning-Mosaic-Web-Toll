@@ -12,9 +12,11 @@
           <li class="breadcrumb-item">
             <a href="{% url "inicio_dashboard" %}">Início</a>
           </li>
+          {% if perms.admin.aluno %}
           <li class="breadcrumb-item">
-            <a href="{% url "listagem_mosaicos" %}">Mosaicos</a>
+            <a href="{% url "listagem_mosaicos" %}">Meus Mosaicos</a>
           </li>
+          {% endif %}
           <li class="breadcrumb-item active">Murais</li>
         </ol>
 

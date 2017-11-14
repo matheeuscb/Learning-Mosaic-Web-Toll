@@ -12,7 +12,10 @@
           <li class="breadcrumb-item">
             <a href="{% url "inicio_dashboard" %}">Início</a>
           </li>
-          <li class="breadcrumb-item active">Mural Canvas</li>
+          <li class="breadcrumb-item">
+            <a href="{% url "listagem_mosaicos" %}">Meus Mosaicos</a>
+          </li>
+          <li class="breadcrumb-item active">Meus Objetivos</li>
         </ol>
 
         <div id="main" class="container-fluid" style="margin-top: 30px">
@@ -41,7 +44,7 @@
   <div id="top" class="row">
     <div class="col-sm-8">
       <h2>Meu Mosaico do Canvas {{canvas.nome_canvas}}</h2>
-      <h9> Adicionar objetivos de aprendizagem que especifiquem o que você deseja ser capaz de aprender ou fazer ao final da atividade de ensino</h9>
+    
     </div>
    <!--  <div class="col-sm-6">
       
@@ -61,6 +64,9 @@
      <div class="col-sm-4">
       <a href="{% url 'criar_objetivo' id_mosaico=mosaico.0.id %}" class="btn btn-primary pull-right h2">Novo Objetivo</a>
     </div>
+    <div class="col-md-10">
+        <h9> Adicionar objetivos de aprendizagem que especifiquem o que você deseja ser capaz de aprender ou fazer ao final da atividade de ensino</h9>
+      </div>
   </div> <!-- /#top -->
  
  <!-- descricao_objetivos = models.TextField('Descrição', blank=True)

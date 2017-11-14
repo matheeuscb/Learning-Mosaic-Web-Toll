@@ -15,7 +15,10 @@
           <li class="breadcrumb-item active">
             <a href="{% url "relatorio_canvas" %}">Meus Relatórios</a>
           </li>
-           <li class="breadcrumb-item active">Gráficos</li>
+           <li class="breadcrumb-item active">
+           <a href="{% url 'listagem_graficos' id_canvas=canvas.id %}"> Meus Gráficos</a>
+          </li>
+          <li class="breadcrumb-item active">Gráfico</li>
         </ol>
 
         <div id="main" class="container-fluid" style="margin-top: 30px">
