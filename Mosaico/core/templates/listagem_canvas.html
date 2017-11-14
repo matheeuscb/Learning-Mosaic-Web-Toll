@@ -83,6 +83,7 @@
           <td style="text-align: center;">{{c.descricao_canvas}}</td>
           <td style="text-align: center;" class="actions">
             <a class="btn btn-success btn-xs" href="{% url 'listagem_areas' id_canvas=c.id %}">Áreas</a>
+            <a class="btn btn-success btn-xs" href="{% url 'listagem_murais' id_canvas=c.id %}">Mosaicos</a>
             <a class="btn btn-warning btn-xs" href="{% url 'editar_canvas' id_canvas=c.id %}">Editar</a>
             <a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal" onclick="localStorage.setItem('id_canvas',{{c.id}})">Excluir</a>
           </td>
@@ -116,7 +117,7 @@
         <h4 class="modal-title" id="modalLabel">Excluir Item</h4>
       </div>
       <div class="modal-body">
-        Deseja realmente excluir este item?
+        Podem existir outros dados relacionados a este Canvas. Deseja realmente excluir este item? 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" onclick="window.location.href='/dashboard/excluir_canvas.html/'.concat(localStorage.getItem('id_canvas'))">Sim</button>
