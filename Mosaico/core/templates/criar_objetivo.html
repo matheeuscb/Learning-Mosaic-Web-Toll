@@ -148,7 +148,7 @@
 
 </div>
 
-<script>
+<!-- <script>
     $("#pegar_verbo").change(function () {
       var nivel = $(this).val();
 
@@ -166,8 +166,7 @@
       });
 
     });
-  </script>
-
+  </script> -->
 {% endblock %}
 
 <!-- $( "#novo_sdc_estado" ).change(function() {
@@ -188,3 +187,21 @@
         }
         echo '<td>' . form_dropdown('cidade', $op, 0, 'class="form-control large"') . '</td></tr>';
     } -->
+
+{% block javascript %}
+  
+  <script type="text/javascript">
+    $("#pegar_verbo").change(function() {
+      var value = $(this).val();
+      {%for nivel, verbo in drop.items %}
+        {% for v in verbo %}
+          if ({{v.id}} == value) {
+          // alert('{{ verbo.nome_verbo }}');
+            document.getElementById("descricao_objetivos").value = '{{ v.nome_verbo }} ';
+          }            
+        {% endfor %}
+      {% endfor %}
+    });
+  </script>
+
+{% endblock %}

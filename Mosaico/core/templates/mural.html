@@ -144,7 +144,7 @@ var context = canvas.getContext("2d");
         areas[idarea] = {x: x1,y:y1, cont: 0};
         context.fillStyle = "royalblue";
         context.fillRect(x1,y1,areawidth,areaheight);
-        context.font = "14pt sans-serif";
+        context.font = "12pt sans-serif";
         context.fillStyle = "white";
         context.textAlign = "center";
         context.fillText(nomearea,areas[idarea].x+areawidth/2,areas[idarea].y+areaheight/2);
@@ -153,7 +153,7 @@ var context = canvas.getContext("2d");
         areas[idarea] = {x: x2,y:y2, cont: 0};
         context.fillStyle = "royalblue";
         context.fillRect(x2,y2,areawidth,areaheight);
-        context.font = "14pt sans-serif";
+        context.font = "12pt sans-serif";
         context.fillStyle = "white";
        context.textAlign = "center";
         context.fillText(nomearea,areas[idarea].x+areawidth/2,areas[idarea].y+areaheight/2);
@@ -162,7 +162,7 @@ var context = canvas.getContext("2d");
         areas[idarea] = {x: x3,y:y3, cont: 0};
         context.fillStyle = "royalblue";
         context.fillRect(x3,y3,areawidth,areaheight);
-        context.font = "14pt sans-serif";
+        context.font = "12pt sans-serif";
         context.fillStyle = "white";
        context.textAlign = "center";
         context.fillText(nomearea,areas[idarea].x+areawidth/2,areas[idarea].y+areaheight/2);
@@ -171,14 +171,14 @@ var context = canvas.getContext("2d");
           areas[idarea] = {x: x4,y:y4, cont: 0};
         context.fillStyle = "royalblue";
         context.fillRect(x4,y4,areawidth,areaheight);
-        context.font = "14pt sans-serif";
+        context.font = "12pt sans-serif";
         context.fillStyle = "white";
        context.textAlign = "center";
         context.fillText(nomearea,areas[idarea].x+areawidth/2,areas[idarea].y+areaheight/2);
        }
        cnt++;
     }
-     context.font = "9pt sans-serif";
+     context.font = "8pt sans-serif bold";
       context.textAlign = "start";
     if(areas[idarea].cont == 0){
       context.fillStyle = cores[corpostit];
@@ -186,9 +186,9 @@ var context = canvas.getContext("2d");
       topy = areas[idarea].y - 120;
       context.fillRect(topx,topy,100,100);
             context.fillStyle = "black";
-      context.fillText(nomestatus,topx+10,topy+20);
-      context.fillText(nomeverbo,topx+10,topy+40);
-      wrapText(context,objetivo,topx+10,topy+60,90,14);
+      // context.fillText(nomestatus,topx+10,topy+20);
+      context.fillText(nomeverbo,topx+10,topy+20);
+      wrapText(context,objetivo,topx+10,topy+40,90,14);
      // context.fillText("teste",topx+10,topy+80);
     }
     else if(areas[idarea].cont == 1){
@@ -197,9 +197,9 @@ var context = canvas.getContext("2d");
       topy = areas[idarea].y + 20 + areaheight;
       context.fillRect(areas[idarea].x,areas[idarea].y + 20 + areaheight,100,100);
             context.fillStyle = "black";
-      context.fillText(nomestatus,topx+10,topy+20);
-      context.fillText(nomeverbo,topx+10,topy+40);
-      wrapText(context,objetivo,topx+10,topy+60,90,14);
+      // context.fillText(nomestatus,topx+10,topy+20);
+      context.fillText(nomeverbo,topx+10,topy+20);
+      wrapText(context,objetivo,topx+10,topy+40,90,14);
     }
     else if(areas[idarea].cont == 2){
       context.fillStyle = cores[corpostit];
@@ -207,9 +207,9 @@ var context = canvas.getContext("2d");
       topy = areas[idarea].y;
       context.fillRect(areas[idarea].x-120,areas[idarea].y,100,100);
             context.fillStyle = "black";
-      context.fillText(nomestatus,topx+10,topy+20);
-      context.fillText(nomeverbo,topx+10,topy+40);
-      wrapText(context,objetivo,topx+10,topy+60,90,14);
+      // context.fillText(nomestatus,topx+10,topy+20);
+      context.fillText(nomeverbo,topx+10,topy+20);
+      wrapText(context,objetivo,topx+10,topy+40,90,14);
     }
     else if(areas[idarea].cont == 3){
       context.fillStyle = cores[corpostit];
@@ -217,9 +217,9 @@ var context = canvas.getContext("2d");
       topy = areas[idarea].y;
       context.fillRect(areas[idarea].x + areawidth + 20,areas[idarea].y,100,100);
             context.fillStyle = "black";
-      context.fillText(nomestatus,topx+10,topy+20);
-      context.fillText(nomeverbo,topx+10,topy+40);
-      wrapText(context,objetivo,topx+10,topy+60,90,14);
+      // context.fillText(nomestatus,topx+10,topy+20);
+      context.fillText(nomeverbo,topx+10,topy+20);
+      wrapText(context,objetivo,topx+10,topy+40,90,14);
     }
     areas[idarea].cont++;
   </script>
